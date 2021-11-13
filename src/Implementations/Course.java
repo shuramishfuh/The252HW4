@@ -2,13 +2,13 @@ package Implementations;
 
 import java.time.LocalTime;
 
-public class CourseImp implements Interfaces.Course {
+public class Course implements Interfaces.Course {
     private String crn, subject, course_num, section, title, bldg, room, first_name, last_name, college, begin_time, end_time;
     private float credit_hrs;
     private int enrol, available;
     private boolean monday, tuesday, wednesday, thursday, friday, saturday;
 
-    void Course(String crn, String subject, String course_num, String section, String title, float credit_hrs, String college, int enrol, 
+    Course(String crn, String subject, String course_num, String section, String title, float credit_hrs, String college, int enrol, 
             int available, String begin_time, String end_time, String bldg, String room, boolean monday, boolean tuesday, boolean weds, boolean thurs, boolean fri, 
             boolean sat, String first_name, String last_name)
     {
