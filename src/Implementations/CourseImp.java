@@ -1,4 +1,4 @@
-package Implimentations;
+package Implementations;
 
 import java.time.LocalTime;
 
