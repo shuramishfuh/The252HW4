@@ -19,7 +19,7 @@ public class IMCsvToDb implements Interfaces.CsvToDb{
 					r.get(1),
 					r.get(2),
 					r.get(3),
-					r.get(4),
+						r.get(4).toString(),
 					Float.parseFloat(r.get(5)),
 					r.get(6),
 					Integer.parseInt(r.get(7)),

@@ -24,8 +24,8 @@ public class HW4 implements Interfaces.HW4 {
         System.out.println("file created");
         e.htmlToCsv("A_courses.html", "courses.csv");
         List<Implementations.Course> courses = new ArrayList();
-//        IMCsvToDb ee = new IMCsvToDb();
-//        ee.csvToDb(courses, "courses.csv");
+        IMCsvToDb ee = new IMCsvToDb();
+        ee.csvToDb(courses, "courses.csv");
 //        System.out.println(courses.get(0).getCrn());
 
 
