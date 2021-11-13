@@ -2,7 +2,7 @@ package Implementations;
 
 import java.time.LocalTime;
 
-public class CourseImp implements Interfaces.Course {
+public class IMCourse implements Interfaces.Course {
     private String crn, subject, course_num, section, title, bldg, room, first_name, last_name, college, begin_time, end_time;
     private float credit_hrs;
     private int enrol, available;
