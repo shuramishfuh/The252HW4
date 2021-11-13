@@ -1,15 +1,22 @@
 package Implementations;
 
+import java.io.File;
+
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
+
+
 
 public class HW4 implements Interfaces.HW4 {
     public static void main(String[] args) throws IOException {
-        IMDownloader e = new IMDownloader();
-        e.downloadAllHmlToFiles();
+    	File myObj = new File("courses.csv");
+        IMHtmlToCsv e = new IMHtmlToCsv();
+        e.htmlToCsv("A_courses.html", "courses.csv");
+        List<Implementations.Course> courses = new ArrayList();
+        IMCsvToDb ee = new IMCsvToDb();
+        ee.csvToDb(courses, "courses.csv");
+        System.out.println(courses.get(0).getCrn());
+        
     }
 }
