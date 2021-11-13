@@ -51,7 +51,7 @@ public class IMDownloader implements Interfaces.Downloader {
                 'N','O','P','Q','R','S','T','U','V','W','X','Y','Z',};
         for ( char a: letters) {
             downloadHtmlToFile(  pre.concat(String.valueOf(a)).concat(".htm"),
-            (String.valueOf(a).concat("_courses")));
+            (String.valueOf(a).concat("_courses.html")));
             System.out.println("done with " + String.valueOf(a) +"courses");
         }
         System.out.println("Done downloading pages");
