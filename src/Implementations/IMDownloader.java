@@ -35,8 +35,6 @@ public class IMDownloader implements Interfaces.Downloader {
 
             e.printStackTrace();
         }
-
-
     }
 
 /*
@@ -52,7 +50,7 @@ public class IMDownloader implements Interfaces.Downloader {
         for ( char a: letters) {
             downloadHtmlToFile(  pre.concat(String.valueOf(a)).concat(".htm"),
             (String.valueOf(a).concat("_courses.html")));
-            System.out.println("done with " + String.valueOf(a) +"courses");
+            System.out.println("done with " + String.valueOf(a) +"_courses");
         }
         System.out.println("Done downloading pages");
     }
