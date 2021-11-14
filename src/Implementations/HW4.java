@@ -11,39 +11,44 @@ import Interfaces.CourSeera;
 import Interfaces.CourSeeraFactory;
 import Interfaces.Course;
 import Interfaces.CsvToDb;
+import Interfaces.Downloader;
+import Interfaces.HtmlToCsv;
 import Interfaces.Room;
 import Interfaces.Schedule;
 
 public class HW4 implements Interfaces.HW4 {
     public static void main(String[] args) {
-
-//        uncomment to re download files
-
-//        IMDownloader downloader = new IMDownloader();
-//        downloader.downloadAllHmlToFiles();
-
-        File myObj = new File("courses.csv");
-        if (myObj.exists()) {
-            myObj.delete();
-        }
-
-        IMHtmlToCsv e = new IMHtmlToCsv();
-        System.out.println("file created");
-        e.htmlToCsv("H_courses.html", "courses.csv");
-        List<Course> courses = new ArrayList<Course>();
-        CsvToDb ee = new IMCsvToDb();
-        ee.csvToDb(courses, "courses.csv");
-        
-        CourSeeraFactory cccc = new IMCourSeeraFactory();
-        CourSeera cc = cccc.createInstance(courses);
-//        
-//        for (Map.Entry<Room, List<Schedule>> entry : cc.roomSchedule().entrySet()) {
-//            System.out.println("Key: " + entry.getKey().getRoomNumber() + ". Value: " + entry.getValue().get(0).getInstructor());
-//       }
-        
-        
-
-
-    }
-
+		List<Course> courses = new ArrayList<Course>();
+		listGenerator(courses);
+		
+	}
+	
+	
+	public static void listGenerator(List<Course> courses) {
+		 File myObj = new File("courses.csv");
+	        if (myObj.exists()) {
+	            myObj.delete();
+	        }
+		Downloader downloader = new IMDownloader();
+		HtmlToCsv csvMaker = new IMHtmlToCsv();
+		CsvToDb listMaker = new IMCsvToDb();
+		String htmlLink = "";
+		String csvFileName = "courses.csv";
+		// String pre = new String("https://www-banner.aub.edu.lb/catalog/schd_");
+		// char[] letters = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
+        //         'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',};
+		
+		// System.out.println("Starting!");
+        // for (char a : letters) {
+        // 	htmlLink = String.valueOf(a).concat(".html");
+        //     downloader.downloadHtmlToFile(pre.concat(String.valueOf(a)).concat(".htm"), htmlLink);
+        //     System.out.println("Page for letter " + String.valueOf(a) + " has been downloaded");
+        //     csvMaker.htmlToCsv(htmlLink, csvFileName);
+        //     System.out.println("Page for letter " + String.valueOf(a) + " has been parsed into csv");
+        // }
+        // listMaker.csvToDb(courses, csvFileName);
+        System.out.println("Finished!");
+	}
 }
+
+
