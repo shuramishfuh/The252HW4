@@ -4,3 +4,7 @@
 bin/
 *.html
 *.csv
+*.iml
+*.ipr
+*.iws
+out/
