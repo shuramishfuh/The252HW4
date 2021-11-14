@@ -5,9 +5,14 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
+import Interfaces.CourSeera;
+import Interfaces.CourSeeraFactory;
 import Interfaces.Course;
 import Interfaces.CsvToDb;
+import Interfaces.Room;
+import Interfaces.Schedule;
 
 public class HW4 implements Interfaces.HW4 {
     public static void main(String[] args) {
@@ -28,7 +33,15 @@ public class HW4 implements Interfaces.HW4 {
         List<Course> courses = new ArrayList<Course>();
         CsvToDb ee = new IMCsvToDb();
         ee.csvToDb(courses, "courses.csv");
-       System.out.println(courses.get(0).getTitle());
+        
+        CourSeeraFactory cccc = new IMCourSeeraFactory();
+        CourSeera cc = cccc.createInstance(courses);
+//        
+//        for (Map.Entry<Room, List<Schedule>> entry : cc.roomSchedule().entrySet()) {
+//            System.out.println("Key: " + entry.getKey().getRoomNumber() + ". Value: " + entry.getValue().get(0).getInstructor());
+//       }
+        
+        
 
 
     }
