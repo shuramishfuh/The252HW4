@@ -30,7 +30,7 @@ public class IMSchedule implements Interfaces.Schedule {
     }
 
     public String getInstructor() {
-        return this.Instructor.getFirstName() + " " + this.Instructor.getLastName();
+        return this.Instructor;
     }
 
     public String getCourse() {
