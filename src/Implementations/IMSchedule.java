@@ -3,13 +3,12 @@ package Implementations;
 import java.time.LocalTime;
 
 public class IMSchedule implements Interfaces.Schedule{
-	private String Room;
+	private IMRoom Room;
 	private LocalTime FromTime;
 	private LocalTime ToTime;
-	private String Instructor;
+	private IMInstructor Instructor;
 	private String Course;
-	IMSchedule(String room, LocalTime fromTime, LocalTime toTime, String instructor, String course) {
-		
+	IMSchedule(IMRoom room, LocalTime fromTime, LocalTime toTime, IMInstructor instructor, String course) {
 		this.Room = room;
 		this.FromTime = fromTime;
 		this.ToTime = toTime;
@@ -17,7 +16,7 @@ public class IMSchedule implements Interfaces.Schedule{
 		this.Course = course;
 	}
 	public String getRoom() {
-		return this.Room;
+		return this.Room.getBuilding()+ " " + this.Room.getRoomNumber();
 	}
 	public LocalTime getFromTime() {
 		return this.FromTime;
@@ -26,12 +25,9 @@ public class IMSchedule implements Interfaces.Schedule{
 		return this.ToTime;
 	}
 	public String getInstructor() {
-		return this.Instructor;
+		return this.Instructor.getFirstName() + " " + this.Instructor.getLastName();
 	}
 	public String getCourse() {
 		return this.Course;
 	}
-
-	
-
 }
