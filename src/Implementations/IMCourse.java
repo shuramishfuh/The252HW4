@@ -22,7 +22,7 @@ public class IMCourse implements Interfaces.Course {
         this.enrol = enrol;
         this.available = available;
         this.begin_time = begin_time;
-        this.end_time = end_time;
+        this.end_time =  end_time;
         this.bldg = bldg;
         this.room = room;
         this.monday = monday;
@@ -73,11 +73,13 @@ public class IMCourse implements Interfaces.Course {
 
     public java.time.LocalTime getBegin_time()
     {
+    	this.begin_time = this.begin_time.substring(0,2) + ":" + this.begin_time.substring(2);
         return LocalTime.parse(this.begin_time);
     }
 
     public java.time.LocalTime getEnd_time()
     {
+    	this.end_time = this.end_time.substring(0,2) + ":" + this.end_time.substring(2);
         return LocalTime.parse(this.end_time);
     }
 
