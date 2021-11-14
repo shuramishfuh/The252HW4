@@ -43,7 +43,6 @@ public class IMHtmlToCsv implements Interfaces.HtmlToCsv {
                 		tds[34].replace("<TD>", "").trim() + "\n";
 
                 myWriter.append(line);
-                System.out.println(line);
             }
             myWriter.close();
         } catch (IOException e) {

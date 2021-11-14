@@ -21,7 +21,6 @@ public class IMDownloader implements Interfaces.Downloader {
             URL urL = new URL(url);
             ReadableByteChannel readableByteChannel = Channels.newChannel(urL.openStream());
             FileOutputStream fileOutputStream = new FileOutputStream(file);
-            FileChannel fileChannel = fileOutputStream.getChannel();
             fileOutputStream.getChannel()
                     .transferFrom(readableByteChannel, 0, Long.MAX_VALUE);
         } catch (MalformedURLException e) {
