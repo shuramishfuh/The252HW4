@@ -6,6 +6,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import Interfaces.Course;
+import Interfaces.CsvToDb;
+
 public class HW4 implements Interfaces.HW4 {
     public static void main(String[] args) {
 
@@ -18,8 +21,8 @@ public class HW4 implements Interfaces.HW4 {
         IMHtmlToCsv e = new IMHtmlToCsv();
         System.out.println("file created");
         e.htmlToCsv("H_courses.html", "courses.csv");
-        List<Implementations.Course> courses = new ArrayList<Implementations.Course>();
-        IMCsvToDb ee = new IMCsvToDb();
+        List<Course> courses = new ArrayList<Course>();
+        CsvToDb ee = new IMCsvToDb();
         ee.csvToDb(courses, "courses.csv");
     }
 }
