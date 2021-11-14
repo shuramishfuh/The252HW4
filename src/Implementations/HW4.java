@@ -28,7 +28,7 @@ public class HW4 implements Interfaces.HW4 {
         List<Course> courses = new ArrayList<Course>();
         CsvToDb ee = new IMCsvToDb();
         ee.csvToDb(courses, "courses.csv");
-//        System.out.println(courses.get(0).getCrn());
+       System.out.println("DONE");
 
 
     }
