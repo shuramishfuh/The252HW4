@@ -2,7 +2,7 @@ package Implementations;
 
 import Interfaces.Room;
 
-public class IMRoom implements Interfaces.Room, Comparable<IMRoom> {
+public class IMRoom implements Interfaces.Room, Comparable<Room> {
     private String building;
     String roomNumber;
 
@@ -22,11 +22,10 @@ public class IMRoom implements Interfaces.Room, Comparable<IMRoom> {
     }
 
     @Override
-    public int compareTo(IMRoom obj) {
+    public int compareTo(Room obj) {
         if (this.getBuilding().equals(obj.getBuilding()) && this.getRoomNumber().equals(obj.getRoomNumber()))
             return 0;
-        else if(this.getRoomNumber().charAt(0) < obj.getRoomNumber().charAt(0))
-            return -1;
-        else return 1;
+        else 
+            return (this.getRoomNumber().compareTo(obj.getRoomNumber()));
     }
 }

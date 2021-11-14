@@ -30,15 +30,14 @@ public class IMCourSeera implements Interfaces.CourSeera {
 		roomSchedule = new TreeMap<Room, List<Schedule>>();
 
 		for (Course c : courses) {
-			if (c.getBldg().length() < 2 && c.getRoom().length() < 2)
+			if (c.getBldg().length() < 2 || c.getRoom().length() < 2)
 				continue;
 
 			Room room = new IMRoom(c.getBldg(), c.getRoom());
 
 			Instructor instructor = new IMInstructor(c.getInstructor_first(), c.getInstructor_last());
 
-			if (!roomsCreated.contains(room)) {
-			//if(!sameRoom(roomsCreated, room)) { 
+			if(!sameRoom(roomsCreated, room)) { 
 				List<Schedule> sh = new ArrayList<Schedule>();
 				roomsCreated.add(room);
 				sh.add(new IMSchedule(room, c.getBegin_time(), c.getEnd_time(), instructor, c.getTitle()));
