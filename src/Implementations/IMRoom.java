@@ -1,5 +1,7 @@
 package Implementations;
 
+import Interfaces.Room;
+
 public class IMRoom implements Interfaces.Room, Comparable<IMRoom> {
     private String building;
     String roomNumber;
@@ -19,12 +21,12 @@ public class IMRoom implements Interfaces.Room, Comparable<IMRoom> {
         return this.roomNumber;
     }
 
-    //@Override
+    @Override
     public int compareTo(IMRoom obj) {
-        // we sort objects on the basis of Student Id
-        if(this.roomNumber.charAt(0) < obj.roomNumber.charAt(0))
+        if (this.getBuilding().equals(obj.getBuilding()) && this.getRoomNumber().equals(obj.getRoomNumber()))
+            return 0;
+        else if(this.getRoomNumber().charAt(0) < obj.getRoomNumber().charAt(0))
             return -1;
         else return 1;
-        //return (this.roomNumber - obj.roomNumber);
     }
 }

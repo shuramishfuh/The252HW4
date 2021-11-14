@@ -16,6 +16,13 @@ import Interfaces.Schedule;
 public class IMCourSeera implements Interfaces.CourSeera {
 	private TreeMap<Room, List<Schedule>> roomSchedule;
 
+	private boolean sameRoom(List<Room> rooms, Room room) {
+		for (Room r : rooms)
+		if(r.getBuilding().equals(room.getBuilding()) && r.getRoomNumber().equals(room.getRoomNumber()))
+			return true;
+		return false;
+	}
+	
 	IMCourSeera(List<Course> courses) {
 
 		List<Room> roomsCreated = new ArrayList<Room>();
@@ -27,19 +34,19 @@ public class IMCourSeera implements Interfaces.CourSeera {
 				continue;
 
 			Room room = new IMRoom(c.getBldg(), c.getRoom());
-			
+
 			Instructor instructor = new IMInstructor(c.getInstructor_first(), c.getInstructor_last());
 
 			if (!roomsCreated.contains(room)) {
+			//if(!sameRoom(roomsCreated, room)) { 
 				List<Schedule> sh = new ArrayList<Schedule>();
 				roomsCreated.add(room);
-				roomSchedule.put(room, sh);
 				sh.add(new IMSchedule(room, c.getBegin_time(), c.getEnd_time(), instructor, c.getTitle()));
+				roomSchedule.put(room, sh);
 			} else {
 				roomSchedule.get(room)
 						.add(new IMSchedule(room, c.getBegin_time(), c.getEnd_time(), instructor, c.getTitle()));
 			}
-
 		}
 		System.out.println(roomSchedule.toString());
 	}
@@ -97,5 +104,4 @@ public class IMCourSeera implements Interfaces.CourSeera {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 }
