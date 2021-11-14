@@ -13,34 +13,41 @@ import Interfaces.Instructor;
 import Interfaces.Room;
 import Interfaces.Schedule;
 
-public class IMCourSeera implements Interfaces.CourSeera{
-	private TreeMap<Room, List<Schedule>> roomSched;
-	IMCourSeera(List<Course> courses){
-		List<String> roomsCreated = new ArrayList<String>();
-		roomSched = new TreeMap<Room, List<Schedule>>();
-		for(Course c: courses) {
+public class IMCourSeera implements Interfaces.CourSeera {
+	private TreeMap<Room, List<Schedule>> roomSchedule;
+
+	IMCourSeera(List<Course> courses) {
+
+		List<Room> roomsCreated = new ArrayList<Room>();
+
+		roomSchedule = new TreeMap<Room, List<Schedule>>();
+
+		for (Course c : courses) {
+			if (c.getBldg().length() < 2 && c.getRoom().length() < 2)
+				continue;
+
+			Room room = new IMRoom(c.getBldg(), c.getRoom());
 			
-			Room r = new IMRoom(c.getBldg(), c.getRoom());
-			roomsCreated.add(c.getBldg()+" "+ c.getRoom());
-			Schedule s = new IMSchedule(
-						 new IMRoom(c.getBldg(), c.getRoom()),
-						 c.getBegin_time(),
-						 c.getEnd_time(),
-						 new IMInstructor(c.getInstructor_first(), c.getInstructor_last()),
-						 c.getTitle()
-					);
-			if(roomSched.isEmpty()||!roomsCreated.contains(c.getBldg()+" "+ c.getRoom())) {
-				List<Schedule> lista = Arrays.asList(s);
-				roomSched.put(null, lista);
-			}else {
-				roomSched.get(r).add(s);
+			Instructor instructor = new IMInstructor(c.getInstructor_first(), c.getInstructor_last());
+
+			if (!roomsCreated.contains(room)) {
+				List<Schedule> sh = new ArrayList<Schedule>();
+				roomsCreated.add(room);
+				roomSchedule.put(room, sh);
+				sh.add(new IMSchedule(room, c.getBegin_time(), c.getEnd_time(), instructor, c.getTitle()));
+			} else {
+				roomSchedule.get(room)
+						.add(new IMSchedule(room, c.getBegin_time(), c.getEnd_time(), instructor, c.getTitle()));
 			}
+
 		}
+		System.out.println(roomSchedule.toString());
 	}
+
 	@Override
 	public TreeMap<Room, List<Schedule>> roomSchedule() {
 		// TODO Auto-generated method stub
-		return this.roomSched;
+		return this.roomSchedule;
 	}
 
 	@Override
