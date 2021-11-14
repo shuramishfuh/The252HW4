@@ -15,9 +15,9 @@ public class IMHtmlToCsv implements Interfaces.HtmlToCsv {
             String line = "";
             String html = Files.readString(Path.of(htmlFile));
 			if(html.contains("Fall 2021-2022(202210)")) {
-            String fall = html.substring(html.indexOf("Fall 2021-2022(202210)"));
-            fall = fall.substring(0, fall.indexOf("</TABLE>")).trim();
-            String[] rows = fall.split("</TR>");
+				String fall = html.substring(html.indexOf("Fall 2021-2022(202210)"));
+				fall = fall.substring(0, fall.indexOf("</TABLE>")).trim();
+				String[] rows = fall.split("</TR>");
 				for (String row : rows) {
 					String[] tds = row.split("</TD>");
 					line =  tds[1].replace("<TD>", "").trim() + "," +
@@ -41,8 +41,9 @@ public class IMHtmlToCsv implements Interfaces.HtmlToCsv {
 							tds[20].replace("<TD>", "").trim() + "," +
 							tds[33].replace("<TD>", "").trim() + "," +
 							tds[34].replace("<TD>", "").trim() + "\n";
+							myWriter.append(line);
 				}
-                myWriter.append(line);
+                
             }
             myWriter.close();
         } catch (IOException e) {
