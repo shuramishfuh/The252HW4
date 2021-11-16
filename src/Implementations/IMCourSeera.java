@@ -1,7 +1,9 @@
  package Implementations;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -98,8 +100,27 @@ public class IMCourSeera implements Interfaces.CourSeera {
 
 	@Override
 	public Schedule whereIsProf(Instructor instructor) {
-		// TODO Auto-generated method stub
-		return null;
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm");
+		LocalDateTime localDate = LocalDateTime.now();
+//		LocalTime time = LocalTime.parse( dtf.format(localDate));
+		LocalTime time = LocalTime.parse( "08:40");
+		java.time.DayOfWeek dayOfWeek = localDate.getDayOfWeek();
+
+		try {
+			return (Schedule) roomSchedule().values().stream()
+					.flatMap(List::stream)
+					.collect(Collectors.toList()).stream()
+					.filter(u->u.getDay().contains(dayOfWeek))
+					.filter(u ->u.getInstructor().equalsIgnoreCase((instructor.getFirstName().trim()+ " " +instructor.getLastName().trim())))
+					.filter(t-> t.getFromTime().isBefore(time) && t.getToTime().isAfter(time))
+					.collect(Collectors.toList()).get(0);
+		}
+		catch (Exception e){
+			return null;
+		}
+
+
+
 	}
 
 	@Override

@@ -16,24 +16,7 @@ public class HW4 implements Interfaces.HW4 {
 		CourSeeraFactory csf= new IMCourSeeraFactory();	
 		CourSeera CS = csf.createInstance(courses);
 
-		IMInstructor imInstructor = new IMInstructor("Michel"," Kazan");
-		System.out.println(CS.whereWillProfBe(imInstructor));
 
-//		for (Room room : CS.roomSchedule().keySet()) {
-//			List<Schedule> a = CS.roomSchedule().get(room);
-//			for (Schedule s: a
-//			) {
-//				System.out.println(s.getInstructor());
-//				System.out.println(s.getCourse());
-//				System.out.println(s.getRoom());
-//				System.out.println(s.getFromTime());
-//				System.out.println(s.getToTime());
-//				System.out.println(s.getDay());
-//				System.out.println();
-//				System.out.println();
-//				System.out.println();
-//			}
-//		}
 
 	}
 
