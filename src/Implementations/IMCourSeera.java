@@ -2,10 +2,9 @@
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.TreeMap;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import Interfaces.Course;
 import Interfaces.DayOfWeek;
@@ -104,15 +103,20 @@ public class IMCourSeera implements Interfaces.CourSeera {
 	}
 
 	@Override
+	/*
+	* @Param instructor -> instructor to find schedule
+	*
+	* returns schedule of an instructor for a particular day
+	* */
 	public List<Schedule> whereWillProfBe(Instructor instructor) {
 		LocalDate localDate = LocalDate.now();
 		java.time.DayOfWeek dayOfWeek = localDate.getDayOfWeek();
+		return roomSchedule().values().stream()
+				.flatMap(List::stream)
+				.collect(Collectors.toList()).stream()
+				.filter(u->u.getDay().contains(dayOfWeek))
+				.filter(u ->u.getInstructor().equalsIgnoreCase((instructor.getFirstName().trim()+ " " +instructor.getLastName().trim())))
+				.collect(Collectors.toList());
 
-
-
-
-
-
-		return null;
 	}
 }

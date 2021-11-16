@@ -7,14 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import Interfaces.CourSeera;
-import Interfaces.CourSeeraFactory;
-import Interfaces.Course;
-import Interfaces.CsvToDb;
-import Interfaces.Downloader;
-import Interfaces.HtmlToCsv;
-import Interfaces.Room;
-import Interfaces.Schedule;
+import Interfaces.*;
 
 public class HW4 implements Interfaces.HW4 {
 	public static void main(String[] args) {
@@ -22,6 +15,26 @@ public class HW4 implements Interfaces.HW4 {
 		listGenerator(courses);
 		CourSeeraFactory csf= new IMCourSeeraFactory();	
 		CourSeera CS = csf.createInstance(courses);
+
+		IMInstructor imInstructor = new IMInstructor("Michel"," Kazan");
+		System.out.println(CS.whereWillProfBe(imInstructor));
+
+//		for (Room room : CS.roomSchedule().keySet()) {
+//			List<Schedule> a = CS.roomSchedule().get(room);
+//			for (Schedule s: a
+//			) {
+//				System.out.println(s.getInstructor());
+//				System.out.println(s.getCourse());
+//				System.out.println(s.getRoom());
+//				System.out.println(s.getFromTime());
+//				System.out.println(s.getToTime());
+//				System.out.println(s.getDay());
+//				System.out.println();
+//				System.out.println();
+//				System.out.println();
+//			}
+//		}
+
 	}
 
 	public static void listGenerator(List<Course> courses) {
