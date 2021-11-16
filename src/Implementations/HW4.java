@@ -13,11 +13,6 @@ public class HW4 implements Interfaces.HW4 {
 		CourSeeraFactory csf= new IMCourSeeraFactory();	
 		CourSeera CS = csf.createInstance(courses);
 
-//		IMInstructor imInstructor = new IMInstructor("Michel"," Kazan");
-//		IMRoom room = new IMRoom("PHYS","204");
-		IMRoom room = new IMRoom("BIOL","SLH");
-
-
 
 
 	}

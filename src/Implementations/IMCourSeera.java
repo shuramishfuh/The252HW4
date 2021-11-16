@@ -79,9 +79,15 @@ public class IMCourSeera implements Interfaces.CourSeera {
 
     @Override
     public List<Schedule> roomSchedule(Room room, LocalDate date) {
-        // TODO Auto-generated method stub
-        return null;
+        return roomSchedule().values().stream()
+                .flatMap(List::stream)
+                .collect(Collectors.toList()).stream()
+                .filter(u -> u.getRoom().equalsIgnoreCase((room.getBuilding().trim() + " " + room.getRoomNumber().trim())))
+                .filter(u -> u.getDay().contains(date.getDayOfWeek()))
+                .collect(Collectors.toList());
+
     }
+
 
     @Override
     public List<Schedule> roomSchedule(Room room, DayOfWeek day) {
