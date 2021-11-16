@@ -2,6 +2,8 @@ package Implementations;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;
+
+import Interfaces.Course;
 import Interfaces.Room;
 import Interfaces.Instructor;
 
@@ -10,10 +12,10 @@ public class IMSchedule implements Interfaces.Schedule {
     private LocalTime FromTime;
     private LocalTime ToTime;
     private Instructor Instructor;
-    private String Course;
+    private Interfaces.Course Course;
     private java.time.DayOfWeek day;
 
-    IMSchedule(Room room, LocalTime fromTime, LocalTime toTime, Instructor instructor, String course) {
+    IMSchedule(Room room, LocalTime fromTime, LocalTime toTime, Instructor instructor, IMCourse course) {
         this.Room = room;
         this.FromTime = fromTime;
         this.ToTime = toTime;
@@ -38,7 +40,7 @@ public class IMSchedule implements Interfaces.Schedule {
     }
 
     public String getCourse() {
-        return this.Course;
+        return this.Course.getTitle();
     }
 
     @Override

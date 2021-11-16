@@ -47,11 +47,11 @@ public class IMCourSeera implements Interfaces.CourSeera {
 			if(!sameRoom(roomsCreated, room)) { 
 				List<Schedule> sh = new ArrayList<Schedule>();
 				roomsCreated.add(room);
-				sh.add(new IMSchedule(room, c.getBegin_time(), c.getEnd_time(), instructor, c.getTitle()));
+				sh.add(new IMSchedule(room, c.getBegin_time(), c.getEnd_time(), instructor, (IMCourse) c));
 				roomSchedule.put(room, sh);
 			} else {
 				roomSchedule.get(room)
-						.add(new IMSchedule(room, c.getBegin_time(), c.getEnd_time(), instructor, c.getTitle()));
+						.add(new IMSchedule(room, c.getBegin_time(), c.getEnd_time(), instructor, (IMCourse) c));
 			}
 		}
 	}
