@@ -60,9 +60,21 @@ public class IMCourSeera implements Interfaces.CourSeera {
     }
 
     @Override
+    /*
+    * @param room -> room to find schedule
+    *
+    * returns schedule of a particular room
+    * */
     public List<Schedule> roomSchedule(Room room) {
-        // TODO Auto-generated method stub
-        return null;
+        try {
+            return  roomSchedule().values().stream()
+                    .flatMap(List::stream)
+                    .collect(Collectors.toList()).stream()
+                    .filter(u -> u.getRoom().equalsIgnoreCase((room.getBuilding().trim() + " " + room.getRoomNumber().trim())))
+                    .collect(Collectors.toList());
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     @Override
