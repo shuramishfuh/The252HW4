@@ -1,6 +1,8 @@
 package Implementations;
 
 import java.time.LocalTime;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class IMCourse implements Interfaces.Course {
     private String crn, subject, course_num, section, title, bldg, room, first_name, last_name, college, begin_time, end_time;
@@ -74,6 +76,13 @@ public class IMCourse implements Interfaces.Course {
     public java.time.LocalTime getBegin_time()
     {
     	this.begin_time = this.begin_time.substring(0,2) + ":" + this.begin_time.substring(2);
+    	// check for time of format 00 :: 00
+        int numOccurrences = 0;
+        Matcher m = Pattern.compile(":", Pattern.LITERAL).matcher(this.begin_time);
+        while (m.find()) numOccurrences++;
+
+        if (numOccurrences >1 ) this.begin_time =   this.begin_time.substring(0,2)  + this.begin_time.substring(3);
+
         return LocalTime.parse(this.begin_time);
     }
 
