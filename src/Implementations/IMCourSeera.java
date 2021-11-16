@@ -7,11 +7,12 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
 
-public class IMCourSeera implements Interfaces.CourSeera {
+public class IMCourSeera implements Interfaces.CourSeera, Comparator<Schedule> {
     private TreeMap<Room, List<Schedule>> roomSchedule;
 
 
@@ -182,5 +183,10 @@ public class IMCourSeera implements Interfaces.CourSeera {
                 .filter(u -> u.getInstructor().equalsIgnoreCase((instructor.getFirstName().trim() + " " + instructor.getLastName().trim())))
                 .collect(Collectors.toList());
 
+    }
+
+    @Override
+    public int compare(Schedule o1, Schedule o2) {
+        return o1.getToTime().compareTo(o2.getToTime());
     }
 }
