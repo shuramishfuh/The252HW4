@@ -49,8 +49,8 @@ public class IMCsvToDb implements Interfaces.CsvToDb {
 						r.get(19), r.get(20));
 
 					courses.add(course);
-					System.out.println(course.getBegin_time());
-//					System.out.println(course.getEnd_time());
+//					System.out.println(course.getBegin_time());
+					System.out.println(course.getEnd_time());
 
 				line = reader.readLine();
 				

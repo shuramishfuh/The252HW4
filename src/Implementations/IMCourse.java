@@ -89,6 +89,14 @@ public class IMCourse implements Interfaces.Course {
     public java.time.LocalTime getEnd_time()
     {
     	this.end_time = this.end_time.substring(0,2) + ":" + this.end_time.substring(2);
+
+        int numOccurrences = 0;
+        Matcher m = Pattern.compile(":", Pattern.LITERAL).matcher(this.end_time);
+        while (m.find()) numOccurrences++;
+
+        if (numOccurrences >1 ) this.end_time =   this.end_time.substring(0,2)  + this.end_time.substring(3);
+
+
         return LocalTime.parse(this.end_time);
     }
 
