@@ -1,6 +1,8 @@
 package Interfaces;
 
+import java.time.DayOfWeek;
 import java.time.LocalTime;
+import java.util.List;
 
 public interface Schedule {
     String getRoom();
@@ -8,5 +10,5 @@ public interface Schedule {
     LocalTime getToTime();
     String getInstructor();
     String getCourse();
-    java.time.DayOfWeek getDay();
+    List<DayOfWeek> getDay();
 }
