@@ -1,13 +1,10 @@
 package Implementations;
 
-import java.io.File;
+import Interfaces.*;
 
-import java.io.IOException;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-
-import Interfaces.*;
 
 public class HW4 implements Interfaces.HW4 {
 	public static void main(String[] args) {
