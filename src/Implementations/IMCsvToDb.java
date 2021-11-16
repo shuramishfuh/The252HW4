@@ -49,7 +49,6 @@ public class IMCsvToDb implements Interfaces.CsvToDb {
 						r.get(19), r.get(20));
 
 					courses.add(course);
-
 				line = reader.readLine();
 				
 			}

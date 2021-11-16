@@ -8,4 +8,5 @@ public interface Schedule {
     LocalTime getToTime();
     String getInstructor();
     String getCourse();
+    java.time.DayOfWeek getDay();
 }

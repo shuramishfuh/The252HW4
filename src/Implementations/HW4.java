@@ -22,7 +22,6 @@ public class HW4 implements Interfaces.HW4 {
 		listGenerator(courses);
 		CourSeeraFactory csf= new IMCourSeeraFactory();	
 		CourSeera CS = csf.createInstance(courses);
-		System.out.println(CS.roomSchedule());
 	}
 
 	public static void listGenerator(List<Course> courses) {

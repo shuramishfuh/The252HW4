@@ -16,6 +16,13 @@ import Interfaces.Schedule;
 public class IMCourSeera implements Interfaces.CourSeera {
 	private TreeMap<Room, List<Schedule>> roomSchedule;
 
+
+	/*
+	* @param rooms -> list of all courses
+	* @param room -> single room
+	*
+	* checks of room exist in rooms
+	* */
 	private boolean sameRoom(List<Room> rooms, Room room) {
 		for (Room r : rooms)
 		if(r.getBuilding().equals(room.getBuilding()) && r.getRoomNumber().equals(room.getRoomNumber()))
@@ -51,7 +58,6 @@ public class IMCourSeera implements Interfaces.CourSeera {
 
 	@Override
 	public TreeMap<Room, List<Schedule>> roomSchedule() {
-		// TODO Auto-generated method stub
 		return this.roomSchedule;
 	}
 
@@ -99,7 +105,12 @@ public class IMCourSeera implements Interfaces.CourSeera {
 
 	@Override
 	public List<Schedule> whereWillProfBe(Instructor instructor) {
-		// TODO Auto-generated method stub
+		LocalDate localDate = LocalDate.now();
+		java.time.DayOfWeek dayOfWeek = localDate.getDayOfWeek();
+
+
+
+
 		return null;
 	}
 }
