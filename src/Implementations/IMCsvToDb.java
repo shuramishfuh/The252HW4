@@ -26,8 +26,6 @@ public class IMCsvToDb implements Interfaces.CsvToDb {
 			String line = reader.readLine();
 			while (line != null) {
 				List<String> r = Arrays.asList(line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1));
-				if(!r.get(10).equals(".")) {
-					
 					Course course = new IMCourse(
 						r.get(0), 
 						r.get(1), 
@@ -53,7 +51,7 @@ public class IMCsvToDb implements Interfaces.CsvToDb {
 					courses.add(course);
 					System.out.println(course.getBegin_time());
 //					System.out.println(course.getEnd_time());
-				}
+
 				line = reader.readLine();
 				
 			}
