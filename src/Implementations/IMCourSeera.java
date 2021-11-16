@@ -93,12 +93,26 @@ public class IMCourSeera implements Interfaces.CourSeera {
 	}
 
 	@Override
+	/*
+	 * @Param instructor -> instructor to find schedule
+	 *
+	 * returns schedule of an instructor for a  week
+	 * */
 	public List<Schedule> profSchedule(Instructor instructor) {
-		// TODO Auto-generated method stub
-		return null;
+		return roomSchedule().values().stream()
+				.flatMap(List::stream)
+				.collect(Collectors.toList()).stream()
+				.filter(u ->u.getInstructor().equalsIgnoreCase((instructor.getFirstName().trim()+ " " +instructor.getLastName().trim())))
+				.collect(Collectors.toList());
+
 	}
 
 	@Override
+	/*
+	 * @Param instructor -> instructor to find schedule
+	 *
+	 * returns schedule of an instructor for a particular time
+	 * */
 	public Schedule whereIsProf(Instructor instructor) {
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm");
 		LocalDateTime localDate = LocalDateTime.now();
