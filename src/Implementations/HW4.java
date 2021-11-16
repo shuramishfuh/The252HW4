@@ -22,6 +22,7 @@ public class HW4 implements Interfaces.HW4 {
 		listGenerator(courses);
 		CourSeeraFactory csf= new IMCourSeeraFactory();	
 		CourSeera CS = csf.createInstance(courses);
+		System.out.println(CS.roomSchedule());
 	}
 
 	public static void listGenerator(List<Course> courses) {
@@ -41,12 +42,13 @@ public class HW4 implements Interfaces.HW4 {
 		System.out.println("Starting!");
 		for (char a : letters) {
 			htmlLink = String.valueOf(a).concat(".html");
-			//downloader.downloadHtmlToFile(pre.concat(String.valueOf(a)).concat(".htm"), htmlLink);
-			//System.out.println("Page for letter " + String.valueOf(a) + " has been downloaded");
+//			downloader.downloadHtmlToFile(pre.concat(String.valueOf(a)).concat(".htm"), htmlLink);
+//			System.out.println("Page for letter " + String.valueOf(a) + " has been downloaded");
 			csvMaker.htmlToCsv(htmlLink, csvFileName);
-			//System.out.println("Page for letter " + String.valueOf(a) + " has been parsed into csv");
+			System.out.println("Page for letter " + String.valueOf(a) + " has been parsed into csv");
 		}
 		listMaker.csvToDb(courses, csvFileName);
 		System.out.println("Finished!");
 	}
+
 }

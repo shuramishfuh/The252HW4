@@ -7,11 +7,11 @@ import java.nio.file.Path;
 
 public class IMHtmlToCsv implements Interfaces.HtmlToCsv {
     @Override
+
     public void htmlToCsv(String htmlFile, String csvFile) {
 
         try {
             FileWriter myWriter = new FileWriter(csvFile, true);
-
             String line = "";
             String html = Files.readString(Path.of(htmlFile));
 			if(html.contains("Fall 2021-2022(202210)")) {

@@ -3,12 +3,22 @@ package Implementations;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 import Interfaces.Course;
 
 public class IMCsvToDb implements Interfaces.CsvToDb {
 	@Override
+	/*
+	*
+	* @param courses -> list of all courses
+	* @Param csvFile -> csv file name
+	*
+	* csvToDb reads fields in the csvfile
+	* creates courses and add to courses
+	*
+	* */
 	public void csvToDb(List<Course> courses, String csvFile) {
 		BufferedReader reader;
 		try {
@@ -28,8 +38,8 @@ public class IMCsvToDb implements Interfaces.CsvToDb {
 						r.get(6), 
 						Integer.parseInt(r.get(7)), 
 						Integer.parseInt(r.get(8)),
-						r.get(9),
-						r.get(10), 
+						r.get(9).trim().length() == 1 ?  "0000" : r.get(9), // if no start time start at 00:00am
+						r.get(10).trim().length() == 1 ?  "0100" : r.get(10),  // if no end time end at 1:00am
 						r.get(11), 
 						r.get(12), 
 						!r.get(13).equals("."), 
@@ -41,8 +51,9 @@ public class IMCsvToDb implements Interfaces.CsvToDb {
 						r.get(19), r.get(20));
 
 					courses.add(course);
+//					System.out.println(course.getBegin_time());
+//					System.out.println(course.getEnd_time());
 				}
-				
 				line = reader.readLine();
 				
 			}

@@ -47,7 +47,6 @@ public class IMCourSeera implements Interfaces.CourSeera {
 						.add(new IMSchedule(room, c.getBegin_time(), c.getEnd_time(), instructor, c.getTitle()));
 			}
 		}
-		System.out.println(roomSchedule.toString());
 	}
 
 	@Override
