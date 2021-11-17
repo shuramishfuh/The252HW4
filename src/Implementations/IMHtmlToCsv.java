@@ -16,7 +16,8 @@ public class IMHtmlToCsv implements Interfaces.HtmlToCsv {
             String html = Files.readString(Path.of(htmlFile));
 			if(html.contains("Fall 2021-2022(202210)")) {
 				String fall = html.substring(html.indexOf("Fall 2021-2022(202210)"));
-				fall = fall.substring(0, fall.indexOf("</TABLE>")).trim();
+				fall = fall.substring(0, fall.indexOf("<TD>Spring 2021-2022(202220)</TD>")).trim();
+				//fall = fall.substring(0, fall.indexOf("</TABLE>")).trim();
 				String[] rows = fall.split("</TR>");
 				for (String row : rows) {
 					String[] tds = row.split("</TD>");
