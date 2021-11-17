@@ -26,7 +26,7 @@ public class IMRoom implements Interfaces.Room, Comparable<Room> {
         if (this.getBuilding().equals(obj.getBuilding()) && this.getRoomNumber().equals(obj.getRoomNumber()))
             return 0;
         if (this.getBuilding().equals(obj.getBuilding()))
-            return (this.getRoomNumber().compareTo(obj.getRoomNumber()));
-        return (this.getBuilding().compareTo(obj.getBuilding()));
+            return this.getRoomNumber().compareTo(obj.getRoomNumber());
+        return this.getBuilding().compareTo(obj.getBuilding());
     }
 }
