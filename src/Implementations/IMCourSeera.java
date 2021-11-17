@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.TreeMap;
@@ -53,7 +54,12 @@ public class IMCourSeera implements Interfaces.CourSeera, Comparator<Schedule> {
                         .add(new IMSchedule(room, c.getBegin_time(), c.getEnd_time(), instructor, (IMCourse) c));
             }
         }
+        for(List<Schedule> sh : roomSchedule.values()) {
+            Collections.sort(sh, new ScheduleComparator());
+        }
     }
+
+    
 
     @Override
     public TreeMap<Room, List<Schedule>> roomSchedule() {
