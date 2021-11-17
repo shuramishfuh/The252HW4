@@ -3,21 +3,26 @@ package Implementations;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 
 public class IMHtmlToCsv implements Interfaces.HtmlToCsv {
-    @Override
-
-    public void htmlToCsv(String htmlFile, String csvFile) {
+    private List<String> semesters = new ArrayList<String>(Arrays.asList("Fall","Spring"));
+	@Override
+    public void htmlToCsv(String htmlFile, String csvFile, String semester) {
 
         try {
+			semesters.remove(semester);
             FileWriter myWriter = new FileWriter(csvFile, true);
             String line = "";
+			String required_semester = semester.concat(" 2021-2022(202220)");
+			String next_semester_regex = "<TD>".concat(semesters.get(0)).concat(" 2021-2022(202220)").concat("</TD>");
             String html = Files.readString(Path.of(htmlFile));
-			if(html.contains("Fall 2021-2022(202210)")) {
-				String fall = html.substring(html.indexOf("Fall 2021-2022(202210)"));
-				fall = fall.substring(0, fall.indexOf("<TD>Spring 2021-2022(202220)</TD>")).trim();
-				//fall = fall.substring(0, fall.indexOf("</TABLE>")).trim();
+			if(html.contains(required_semester)) {
+				String fall = html.substring(html.indexOf(required_semester));
+				fall = fall.substring(0, fall.indexOf(next_semester_regex)).trim();
 				String[] rows = fall.split("</TR>");
 				for (String row : rows) {
 					String[] tds = row.split("</TD>");
