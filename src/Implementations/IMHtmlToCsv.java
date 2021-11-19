@@ -27,14 +27,14 @@ public class IMHtmlToCsv implements Interfaces.HtmlToCsv {
 				String[] rows = fall.split("</TR>");
 				for (String row : rows) {
 					String[] tds = row.split("</TD>");
-					line =  tds[1].replace("<TD>", "").trim() + "," +
-							tds[2].replace("<TD>", "").trim() + "," +
-							tds[3].replace("<TD>", "").trim() + "," +
-							tds[4].replace("<TD>", "").trim() + "," +"\"" +
-							tds[5].replace("<TD>", "").trim() + "\"," +
-							tds[6].replace("<TD>", "").trim() + "," +
-							tds[8].replace("<TD>", "").trim() + "," +
-							tds[9].replace("<TD>", "").trim() + "," +
+					line =  tds[ConstantVariables.CRN].replace("<TD>", "").trim() + "," +
+							tds[ConstantVariables.SUBJECT].replace("<TD>", "").trim() + "," +
+							tds[ConstantVariables.COURSE_NUM].replace("<TD>", "").trim() + "," +
+							tds[ConstantVariables.SECTION].replace("<TD>", "").trim() + "," +"\"" +
+							tds[ConstantVariables.TITLE].replace("<TD>", "").trim() + "\"," +
+							tds[ConstantVariables.CREDIT_HOURS].replace("<TD>", "").trim() + "," +
+							tds[ConstantVariables.COLLEGE].replace("<TD>", "").trim() + "," +
+							tds[ConstantVariables.ACTUAL_ENROL].replace("<TD>", "").trim() + "," +
 							tds[10].replace("<TD>", "").trim() + "," +
 							tds[11].replace("<TD>", "").trim() + "," +
 							tds[12].replace("<TD>", "").trim() + "," +
