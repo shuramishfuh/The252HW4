@@ -13,26 +13,29 @@ public class HW4 implements Interfaces.HW4 {
 		CourSeeraFactory csf = new IMCourSeeraFactory();
 		CourSeera CS = csf.createInstance(courses);
 
-		// IMInstructor imInstructor = new IMInstructor("Michel"," Kazan");
-		// IMRoom room = new IMRoom("PHYS","204");
+		 IMInstructor imInstructor = new IMInstructor("Michel"," Kazan");
+		 IMRoom room = new IMRoom("FISK","104");
 		// IMRoom room = new IMRoom("BIOL","SLH");
 
 		// Schedule s= CS.whoWasThereLast(room);
-		// List<Schedule> sc= CS.roomSchedule(room);
+//		 List<Schedule> sc= CS.roomSchedule(room);
+		 Schedule sc= CS.whoWasThereLast(room);
 		// List<Schedule> sc= CS.whereWillProfBe(imInstructor);
-		// List<Schedule> sc = CS.profSchedule(imInstructor);
-		// Schedule s = CS.whereIsProf(imInstructor);
+//		 List<Schedule> sc = CS.profSchedule(imInstructor);
+//		 Schedule sc = CS.whereIsProf(imInstructor);
 		// Schedule s = CS.whoIsThereNow(room);
-		// System.out.println(sc);
-		// for (Schedule s : sc
-		// ) {
-		// System.out.println(s.getInstructor());
-		// System.out.println(s.getCourse());
-		// System.out.println(s.getFromTime());
-		// System.out.println(s.getToTime());
-		// System.out.println(s.getRoom());
-		// System.out.println(s.getDay());
-		// }
+//		 System.out.println(sc.getRoom());
+//		 for (Schedule s : sc
+//		 ) {
+//		 System.out.println(s.getInstructor());
+//		 System.out.println(s.getCourse());
+//		 System.out.println(s.getFromTime());
+//		 System.out.println(s.getToTime());
+//		 System.out.println(s.getRoom());
+//		 System.out.println(s.getDay());
+//			 System.out.println();
+//			 System.out.println();
+		 }
 
 		// for (Room room : CS.roomSchedule().keySet()) {
 		// List<Schedule> a = CS.roomSchedule().get(room);
@@ -50,7 +53,7 @@ public class HW4 implements Interfaces.HW4 {
 		// }
 		// }
 
-	}
+//	}
 
 	public static void listGenerator(List<Course> courses) {
 		File myObj = new File("courses.csv");
