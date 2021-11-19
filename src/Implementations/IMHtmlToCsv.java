@@ -35,19 +35,19 @@ public class IMHtmlToCsv implements Interfaces.HtmlToCsv {
 							tds[ConstantVariables.CREDIT_HOURS].replace("<TD>", "").trim() + "," +
 							tds[ConstantVariables.COLLEGE].replace("<TD>", "").trim() + "," +
 							tds[ConstantVariables.ACTUAL_ENROL].replace("<TD>", "").trim() + "," +
-							tds[10].replace("<TD>", "").trim() + "," +
-							tds[11].replace("<TD>", "").trim() + "," +
-							tds[12].replace("<TD>", "").trim() + "," +
-							tds[13].replace("<TD>", "").trim() + "," +
-							tds[14].replace("<TD>", "").trim() + "," +
-							tds[15].replace("<TD>", "").trim() + "," +
-							tds[16].replace("<TD>", "").trim() + "," +
-							tds[17].replace("<TD>", "").trim() + "," +
-							tds[18].replace("<TD>", "").trim() + "," +
-							tds[19].replace("<TD>", "").trim() + "," +
-							tds[20].replace("<TD>", "").trim() + "," +
-							tds[33].replace("<TD>", "").trim() + "," +
-							tds[34].replace("<TD>", "").trim() + "\n";
+							tds[ConstantVariables.SEATS_AVAILABLE].replace("<TD>", "").trim() + "," +
+							tds[ConstantVariables.BEGIN_TIME].replace("<TD>", "").trim() + "," +
+							tds[ConstantVariables.END_TIME].replace("<TD>", "").trim() + "," +
+							tds[ConstantVariables.BUILDING].replace("<TD>", "").trim() + "," +
+							tds[ConstantVariables.ROOM].replace("<TD>", "").trim() + "," +
+							tds[ConstantVariables.MONDAY].replace("<TD>", "").trim() + "," +
+							tds[ConstantVariables.TUESDAY].replace("<TD>", "").trim() + "," +
+							tds[ConstantVariables.WEDNESDAY].replace("<TD>", "").trim() + "," +
+							tds[ConstantVariables.THURSDAY].replace("<TD>", "").trim() + "," +
+							tds[ConstantVariables.FRIDAY].replace("<TD>", "").trim() + "," +
+							tds[ConstantVariables.SATURDAY].replace("<TD>", "").trim() + "," +
+							tds[ConstantVariables.INSTRUCTOR_FIRST_NAME].replace("<TD>", "").trim() + "," +
+							tds[ConstantVariables.INSTRUCTOR_LAST_NAME].replace("<TD>", "").trim() + "\n";
 							myWriter.append(line);
 				}
                 
