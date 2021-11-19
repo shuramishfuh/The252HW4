@@ -14,7 +14,7 @@ public class HW4 implements Interfaces.HW4 {
 		CourSeera CS = csf.createInstance(courses);
 
 		 IMInstructor imInstructor = new IMInstructor("Michel"," Kazan");
-		 IMRoom room = new IMRoom("FISK","104");
+		 IMRoom room = new IMRoom("Fadi","420");
 		// IMRoom room = new IMRoom("BIOL","SLH");
 
 		// Schedule s= CS.whoWasThereLast(room);

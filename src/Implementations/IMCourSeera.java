@@ -54,6 +54,7 @@ public class IMCourSeera implements Interfaces.CourSeera, Comparator<Schedule> {
                         .add(new IMSchedule(room, c.getBegin_time(), c.getEnd_time(), instructor, (IMCourse) c));
             }
         }
+        roomSchedule.put(new IMRoom("Fadi","420"),new ArrayList<>());
         for (List<Schedule> sh : roomSchedule.values()) {
             Collections.sort(sh, new ScheduleComparator());
         }
@@ -129,18 +130,19 @@ public class IMCourSeera implements Interfaces.CourSeera, Comparator<Schedule> {
                         .collect(Collectors.toList());
 
                 if (list.size() != 0) break;
-               dayToMoveBackWards= dayToMoveBackWards.plus(-1);
+                dayToMoveBackWards = dayToMoveBackWards.plus(-1);
                 time = LocalTime.parse("23:59");
             } while (!dayOfWeek.equals(dayToMoveBackWards));
 
 
+            if (list.size() != 0) {
+                System.out.printf("this room has no classes");
+                return null;
+            }
             schedule = list.get(list.size() - 1);
-            System.out.println(schedule.getInstructor());
-            System.out.println(schedule.getFromTime().toString());
-            System.out.println(schedule.getToTime().toString());
-            System.out.println(schedule.getDay().toString());
             return schedule;
         } catch (Exception e) {
+            System.out.printf("this class does not exist ");
             return null;
         }
     }
