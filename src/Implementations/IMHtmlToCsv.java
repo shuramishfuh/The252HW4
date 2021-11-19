@@ -17,8 +17,6 @@ public class IMHtmlToCsv implements Interfaces.HtmlToCsv {
 			semesters.remove(semester);
             FileWriter myWriter = new FileWriter(csvFile, true);
             String line = "";
-			String required_semester = semester.concat(" 2021-2022(202220)");
-			String next_semester_regex = "<TD>".concat(semesters.get(0)).concat(" 2021-2022(202220)").concat("</TD>");
             String html = Files.readString(Path.of(htmlFile));
 			if(html.contains("Fall 2021-2022(202210)")) {
 				String fall = html.substring(html.indexOf("Fall 2021-2022(202210)"));
