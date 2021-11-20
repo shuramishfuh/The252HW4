@@ -262,7 +262,7 @@ public class UserInterfaceGUI extends JFrame {
 						sc = CS.roomSchedule(r);
 					}
 					else if(rdbtnDayOfThe.isSelected()) {
-						sc = CS.roomSchedule(r, Interfaces.DayOfWeek.values()[comboBox_1.getSelectedIndex() - 1] );
+						sc = CS.roomSchedule(r, DayOfWeek.values()[comboBox_1.getSelectedIndex() - 1] );
 					}else {
 						sc = CS.roomSchedule(r );
 					}
