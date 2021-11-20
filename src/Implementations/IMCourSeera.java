@@ -54,12 +54,12 @@ public class IMCourSeera implements Interfaces.CourSeera, Comparator<Schedule> {
                         .add(new IMSchedule(room, c.getBegin_time(), c.getEnd_time(), instructor, (IMCourse) c));
             }
         }
-        for(List<Schedule> sh : roomSchedule.values()) {
+        roomSchedule.put(new IMRoom("Fadi","420"),new ArrayList<>());
+        for (List<Schedule> sh : roomSchedule.values()) {
             Collections.sort(sh, new ScheduleComparator());
         }
     }
 
-    
 
     @Override
     public TreeMap<Room, List<Schedule>> roomSchedule() {
@@ -68,15 +68,15 @@ public class IMCourSeera implements Interfaces.CourSeera, Comparator<Schedule> {
 
     @Override
     /*
-    * @param room -> room to find schedule
-    *
-    * returns schedule of a particular room
-    * */
+     * @param room -> room to find schedule
+     *
+     * returns schedule of a particular room
+     * */
     public List<Schedule> roomSchedule(Room room) {
         try {
-            return  roomSchedule().values().stream()
+            return roomSchedule().values().stream()
                     .flatMap(List::stream)
-                    .collect(Collectors.toList()).stream()
+//                    .collect(Collectors.toList()).stream()
                     .filter(u -> u.getRoom().equalsIgnoreCase((room.getBuilding().trim() + " " + room.getRoomNumber().trim())))
                     .collect(Collectors.toList());
         } catch (Exception e) {
@@ -108,8 +108,43 @@ public class IMCourSeera implements Interfaces.CourSeera, Comparator<Schedule> {
 
     @Override
     public Schedule whoWasThereLast(Room room) {
-        // TODO Auto-generated method stub
-        return null;
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm");
+        LocalDateTime localDate = LocalDateTime.now();
+        LocalTime time = LocalTime.parse(dtf.format(localDate));
+        java.time.DayOfWeek dayOfWeek = localDate.getDayOfWeek();
+
+        java.time.DayOfWeek dayToMoveBackWards = dayOfWeek;
+        Schedule schedule;
+        List<Schedule> list;
+        try {
+
+            do {
+                LocalTime finalTime = time;
+                java.time.DayOfWeek finalDayToMoveBackWards = dayToMoveBackWards;
+                list = roomSchedule().values().stream()
+                        .flatMap(List::stream)
+                        .collect(Collectors.toList()).stream()
+                        .filter(u -> u.getDay().contains(finalDayToMoveBackWards))
+                        .filter(u -> u.getRoom().equalsIgnoreCase((room.getBuilding().trim() + " " + room.getRoomNumber().trim())))
+                        .filter(t -> t.getToTime().isBefore(finalTime))
+                        .collect(Collectors.toList());
+
+                if (list.size() != 0) break;
+                dayToMoveBackWards = dayToMoveBackWards.plus(-1);
+                time = LocalTime.parse("23:59");
+            } while (!dayOfWeek.equals(dayToMoveBackWards));
+
+
+            if (list.size() != 0) {
+                System.out.printf("this room has no classes");
+                return null;
+            }
+            schedule = list.get(list.size() - 1);
+            return schedule;
+        } catch (Exception e) {
+            System.out.printf("this class does not exist ");
+            return null;
+        }
     }
 
     @Override
@@ -119,7 +154,7 @@ public class IMCourSeera implements Interfaces.CourSeera, Comparator<Schedule> {
         java.time.DayOfWeek dayOfWeek = localDate.getDayOfWeek();
         LocalTime time = LocalTime.parse(dtf.format(localDate));
         try {
-            return  roomSchedule().values().stream()
+            return roomSchedule().values().stream()
                     .flatMap(List::stream)
                     .collect(Collectors.toList()).stream()
                     .filter(u -> u.getDay().contains(dayOfWeek))
@@ -159,7 +194,7 @@ public class IMCourSeera implements Interfaces.CourSeera, Comparator<Schedule> {
         java.time.DayOfWeek dayOfWeek = localDate.getDayOfWeek();
 
         try {
-            return  roomSchedule().values().stream()
+            return roomSchedule().values().stream()
                     .flatMap(List::stream)
                     .collect(Collectors.toList()).stream()
                     .filter(u -> u.getDay().contains(dayOfWeek))
