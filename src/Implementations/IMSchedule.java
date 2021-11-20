@@ -50,7 +50,6 @@ public class IMSchedule implements Interfaces.Schedule {
         return this.day;
     }
 
-
     /*
      * @param course -> course
      *

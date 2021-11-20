@@ -1,7 +1,5 @@
 package Interfaces;
 
-import Implementations.IMDownloader;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 

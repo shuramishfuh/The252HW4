@@ -1,17 +1,13 @@
 package Implementations;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
 import Interfaces.CourSeera;
 import Interfaces.CourSeeraFactory;
 import Interfaces.Course;
 import Interfaces.Schedule;
-
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JComboBox;
@@ -20,7 +16,6 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Pattern;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import javax.swing.JRadioButton;
@@ -28,7 +23,6 @@ import javax.swing.JScrollPane;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JTextArea;
-import javax.swing.JScrollBar;
 
 public class UserInterfaceGUI extends JFrame {
 
@@ -64,16 +58,6 @@ public class UserInterfaceGUI extends JFrame {
 		Initializer.listGenerator(courses);
 		CourSeeraFactory csf = new IMCourSeeraFactory();
 		CourSeera CS = csf.createInstance(courses);
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		
 		setTitle("CourSeera: Your everyday tool for AUB courses");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -127,8 +111,6 @@ public class UserInterfaceGUI extends JFrame {
 		panel_1.add(rdbtnDayOfThe);
 		
 		
-		
-		
 		ButtonGroup btnGroup = new ButtonGroup();
 		btnGroup.add(rdbtnDayOfThe);
 		btnGroup.add(rdbtnNewRadioButton);
@@ -180,8 +162,6 @@ public class UserInterfaceGUI extends JFrame {
 		panel_2.add(comboBox_1);
 		panel_2.setVisible(false);
 
-		
-		
 		JLabel lblNewLabel_1 = new JLabel("Enter Room Name");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblNewLabel_1.setBounds(0, 11, 298, 28);
@@ -193,13 +173,9 @@ public class UserInterfaceGUI extends JFrame {
 		textField.setColumns(10);
 		panel.add(textField);
 		
-		
 		panel_1.setVisible(false);
 		panel.setVisible(false);
 		panel_3.setVisible(false);
-		
-		
-		
 		
 		rdbtnNewRadioButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -207,8 +183,6 @@ public class UserInterfaceGUI extends JFrame {
 					panel_2.setVisible(false);
 					panel_3.setVisible(true);
 				}
-				
-				
 			}
 		});
 		rdbtnDayOfThe.addActionListener(new ActionListener() {
@@ -217,11 +191,8 @@ public class UserInterfaceGUI extends JFrame {
 					panel_2.setVisible(true);
 					panel_3.setVisible(false);
 				}
-				
-				
 			}
 		});
-		
 		
 		JComboBox comboBox = new JComboBox(choices);
 		comboBox.addActionListener(new ActionListener() {
@@ -233,7 +204,6 @@ public class UserInterfaceGUI extends JFrame {
 					lblNewLabel_1.setText("Enter Room Name");
 					panel.setVisible(true);
 					panel_1.setVisible(true);
-					
 				}
 				if(comboBox.getSelectedIndex() == 2) {
 					lblNewLabel_1.setText("Enter Room Name");
@@ -276,14 +246,7 @@ public class UserInterfaceGUI extends JFrame {
 		contentPane.add(taScroll);
 		textArea.setFont(new Font("Calibri", Font.BOLD, 15));
 		
-		 
-		
-		
 		textArea.setEditable(false);
-		
-		
-		
-		
 		
 		JButton btnNewButton = new JButton("Submit");
 		btnNewButton.addActionListener(new ActionListener() {
@@ -316,7 +279,6 @@ public class UserInterfaceGUI extends JFrame {
 						 }
 						 textArea.setText(line);
 						
-						
 					}
 					if(comboBox.getSelectedIndex() == 2) {
 						
@@ -324,8 +286,6 @@ public class UserInterfaceGUI extends JFrame {
 						IMRoom r = new IMRoom(room[0], room[1]);
 						Schedule sc = CS.whoWasThereLast(r);
 						textArea.setText(sc.getInstructor());
-						
-						
 					}	
 					if(comboBox.getSelectedIndex() == 3) {
 						String[] room = textField.getText().split(" ");

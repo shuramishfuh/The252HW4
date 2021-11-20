@@ -8,7 +8,6 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -18,13 +17,13 @@ import java.util.stream.Collectors;
 public class IMCourSeera implements Interfaces.CourSeera, Comparator<Schedule> {
     private TreeMap<Room, List<Schedule>> roomSchedule;
 
-
     /*
      * @param rooms -> list of all courses
+     * 
      * @param room -> single room
      *
      * checks of room exist in rooms
-     * */
+     */
     private boolean sameRoom(List<Room> rooms, Room room) {
         for (Room r : rooms)
             if (r.getBuilding().equals(room.getBuilding()) && r.getRoomNumber().equals(room.getRoomNumber()))
@@ -56,12 +55,10 @@ public class IMCourSeera implements Interfaces.CourSeera, Comparator<Schedule> {
                         .add(new IMSchedule(room, c.getBegin_time(), c.getEnd_time(), instructor, (IMCourse) c));
             }
         }
-        roomSchedule.put(new IMRoom("Fadi","420"),new ArrayList<>());
         for (List<Schedule> sh : roomSchedule.values()) {
             Collections.sort(sh, new ScheduleComparator());
         }
     }
-
 
     @Override
     public TreeMap<Room, List<Schedule>> roomSchedule() {
@@ -73,14 +70,14 @@ public class IMCourSeera implements Interfaces.CourSeera, Comparator<Schedule> {
      * @param room -> room to find schedule
      *
      * returns schedule of a particular room
-     * */
+     */
     public List<Schedule> roomSchedule(Room room) {
         try {
             return roomSchedule().values().stream()
-                    .flatMap(List::stream)
-                    .collect(Collectors.toList()).stream()
-                    .filter(u -> u.getRoom().equalsIgnoreCase((room.getBuilding().trim() + " " + room.getRoomNumber().trim())))
-                    .collect(Collectors.toList());
+                .flatMap(List::stream)
+                .collect(Collectors.toList()).stream()
+                .filter(u -> u.getRoom().equalsIgnoreCase((room.getBuilding().trim() + " " + room.getRoomNumber().trim())))
+                .collect(Collectors.toList());
         } catch (Exception e) {
             return null;
         }
@@ -89,23 +86,19 @@ public class IMCourSeera implements Interfaces.CourSeera, Comparator<Schedule> {
     @Override
     public List<Schedule> roomSchedule(Room room, LocalDate date) {
         return roomSchedule().values().stream()
-                .flatMap(List::stream)
-                .collect(Collectors.toList()).stream()
-                .filter(u -> u.getRoom().equalsIgnoreCase((room.getBuilding().trim() + " " + room.getRoomNumber().trim())))
-                .filter(u -> u.getDay().contains(date.getDayOfWeek()))
-                .collect(Collectors.toList());
-
+            .flatMap(List::stream).collect(Collectors.toList()).stream()
+            .filter(u -> u.getRoom().equalsIgnoreCase((room.getBuilding().trim() + " " + room.getRoomNumber().trim())))
+            .filter(u -> u.getDay().contains(date.getDayOfWeek()))
+            .collect(Collectors.toList());
     }
-
 
     @Override
     public List<Schedule> roomSchedule(Room room, DayOfWeek day) {
         return roomSchedule().values().stream()
-                .flatMap(List::stream)
-                .collect(Collectors.toList()).stream()
-                .filter(u -> u.getRoom().equalsIgnoreCase((room.getBuilding().trim() + " " + room.getRoomNumber().trim())))
-                .filter(u -> u.getDay().contains(day))
-                .collect(Collectors.toList());
+            .flatMap(List::stream).collect(Collectors.toList()).stream()
+            .filter(u -> u.getRoom().equalsIgnoreCase((room.getBuilding().trim() + " " + room.getRoomNumber().trim())))
+            .filter(u -> u.getDay().contains(day))
+            .collect(Collectors.toList());
     }
 
     @Override
@@ -114,12 +107,10 @@ public class IMCourSeera implements Interfaces.CourSeera, Comparator<Schedule> {
         LocalDateTime localDate = LocalDateTime.now();
         LocalTime time = LocalTime.parse(dtf.format(localDate));
         java.time.DayOfWeek dayOfWeek = localDate.getDayOfWeek();
-
         java.time.DayOfWeek dayToMoveBackWards = dayOfWeek;
         Schedule schedule;
         List<Schedule> list;
         try {
-
             do {
                 LocalTime finalTime = time;
                 java.time.DayOfWeek finalDayToMoveBackWards = dayToMoveBackWards;
@@ -127,24 +118,25 @@ public class IMCourSeera implements Interfaces.CourSeera, Comparator<Schedule> {
                         .flatMap(List::stream)
                         .collect(Collectors.toList()).stream()
                         .filter(u -> u.getDay().contains(finalDayToMoveBackWards))
-                        .filter(u -> u.getRoom().equalsIgnoreCase((room.getBuilding().trim() + " " + room.getRoomNumber().trim())))
+                        .filter(u -> u.getRoom()
+                                .equalsIgnoreCase((room.getBuilding().trim() + " " + room.getRoomNumber().trim())))
                         .filter(t -> t.getToTime().isBefore(finalTime))
                         .collect(Collectors.toList());
 
-                if (list.size() != 0) break;
+                if (list.size() != 0)
+                    break;
                 dayToMoveBackWards = dayToMoveBackWards.plus(-1);
                 time = LocalTime.parse("23:59");
             } while (!dayOfWeek.equals(dayToMoveBackWards));
 
-
             if (list.size() == 0) {
-                System.out.printf("this room has no classes");
+                System.out.println("this room has no classes");
                 return null;
             }
             schedule = list.get(list.size() - 1);
             return schedule;
         } catch (Exception e) {
-            System.out.printf("this class does not exist ");
+            System.out.println("this class does not exist ");
             return null;
         }
     }
@@ -156,11 +148,11 @@ public class IMCourSeera implements Interfaces.CourSeera, Comparator<Schedule> {
         java.time.DayOfWeek dayOfWeek = localDate.getDayOfWeek();
         LocalTime time = LocalTime.parse(dtf.format(localDate));
         try {
-            return roomSchedule().values().stream()
-                    .flatMap(List::stream)
+            return roomSchedule().values().stream().flatMap(List::stream)
                     .collect(Collectors.toList()).stream()
                     .filter(u -> u.getDay().contains(dayOfWeek))
-                    .filter(u -> u.getRoom().equalsIgnoreCase((room.getBuilding().trim() + " " + room.getRoomNumber().trim())))
+                    .filter(u -> u.getRoom()
+                            .equalsIgnoreCase((room.getBuilding().trim() + " " + room.getRoomNumber().trim())))
                     .filter(t -> t.getFromTime().isBefore(time) && t.getToTime().isAfter(time))
                     .collect(Collectors.toList()).get(0);
         } catch (Exception e) {
@@ -172,13 +164,14 @@ public class IMCourSeera implements Interfaces.CourSeera, Comparator<Schedule> {
     /*
      * @Param instructor -> instructor to find schedule
      *
-     * returns schedule of an instructor for a  week
-     * */
+     * returns schedule of an instructor for a week
+     */
     public List<Schedule> profSchedule(Instructor instructor) {
         return roomSchedule().values().stream()
                 .flatMap(List::stream)
                 .collect(Collectors.toList()).stream()
-                .filter(u -> u.getInstructor().equalsIgnoreCase((instructor.getFirstName().trim() + " " + instructor.getLastName().trim())))
+                .filter(u -> u.getInstructor()
+                        .equalsIgnoreCase((instructor.getFirstName().trim() + " " + instructor.getLastName().trim())))
                 .collect(Collectors.toList());
 
     }
@@ -188,7 +181,7 @@ public class IMCourSeera implements Interfaces.CourSeera, Comparator<Schedule> {
      * @Param instructor -> instructor to find schedule
      *
      * returns schedule of an instructor for a particular time
-     * */
+     */
     public Schedule whereIsProf(Instructor instructor) {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm");
         LocalDateTime localDate = LocalDateTime.now();
@@ -200,13 +193,13 @@ public class IMCourSeera implements Interfaces.CourSeera, Comparator<Schedule> {
                     .flatMap(List::stream)
                     .collect(Collectors.toList()).stream()
                     .filter(u -> u.getDay().contains(dayOfWeek))
-                    .filter(u -> u.getInstructor().equalsIgnoreCase((instructor.getFirstName().trim() + " " + instructor.getLastName().trim())))
+                    .filter(u -> u.getInstructor().equalsIgnoreCase(
+                            (instructor.getFirstName().trim() + " " + instructor.getLastName().trim())))
                     .filter(t -> t.getFromTime().isBefore(time) && t.getToTime().isAfter(time))
                     .collect(Collectors.toList()).get(0);
         } catch (Exception e) {
             return null;
         }
-
 
     }
 
@@ -215,7 +208,7 @@ public class IMCourSeera implements Interfaces.CourSeera, Comparator<Schedule> {
      * @Param instructor -> instructor to find schedule
      *
      * returns schedule of an instructor for a particular day
-     * */
+     */
     public List<Schedule> whereWillProfBe(Instructor instructor) {
         LocalDate localDate = LocalDate.now();
         java.time.DayOfWeek dayOfWeek = localDate.getDayOfWeek();
@@ -223,7 +216,8 @@ public class IMCourSeera implements Interfaces.CourSeera, Comparator<Schedule> {
                 .flatMap(List::stream)
                 .collect(Collectors.toList()).stream()
                 .filter(u -> u.getDay().contains(dayOfWeek))
-                .filter(u -> u.getInstructor().equalsIgnoreCase((instructor.getFirstName().trim() + " " + instructor.getLastName().trim())))
+                .filter(u -> u.getInstructor()
+                        .equalsIgnoreCase((instructor.getFirstName().trim() + " " + instructor.getLastName().trim())))
                 .collect(Collectors.toList());
     }
 

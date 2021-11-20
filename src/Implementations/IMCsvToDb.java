@@ -3,7 +3,6 @@ package Implementations;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 import Interfaces.Course;
@@ -50,13 +49,10 @@ public class IMCsvToDb implements Interfaces.CsvToDb {
 
 					courses.add(course);
 				line = reader.readLine();
-				
 			}
 			reader.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
 	}
-
 }

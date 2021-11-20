@@ -54,6 +54,5 @@ public class IMHtmlToCsv implements Interfaces.HtmlToCsv {
         } catch (IOException e) {
             System.out.println("Error Parsing to csv");
         }
-
     }
 }

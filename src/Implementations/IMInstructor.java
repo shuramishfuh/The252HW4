@@ -1,7 +1,5 @@
 package Implementations;
 
-import Interfaces.Instructor;
-
 public class IMInstructor implements Interfaces.Instructor {
     private
     String fName;
@@ -11,7 +9,6 @@ public class IMInstructor implements Interfaces.Instructor {
         this.fName = fName;
         this.lName = lName;
     }
-
 
     @Override
     public String getFirstName() {
