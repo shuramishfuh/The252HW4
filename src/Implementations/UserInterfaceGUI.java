@@ -17,15 +17,18 @@ import java.awt.Font;
 import javax.swing.JComboBox;
 import java.awt.event.ActionListener;
 import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JTextArea;
+import javax.swing.JScrollBar;
 
 public class UserInterfaceGUI extends JFrame {
 
@@ -34,6 +37,8 @@ public class UserInterfaceGUI extends JFrame {
 	
 	private JTextField textField;
 	private JTextField txtDdmmyy;
+	private JTextField textField_1;
+	private JTextField textField_2;
 
 	/**
 	 * Launch the application.
@@ -72,7 +77,7 @@ public class UserInterfaceGUI extends JFrame {
 		
 		setTitle("CourSeera: Your everyday tool for AUB courses");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 810, 419);
+		setBounds(100, 100, 1121, 526);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -80,7 +85,7 @@ public class UserInterfaceGUI extends JFrame {
 		
 		JLabel lblNewLabel = new JLabel("Please choose an option from the dropdown menu");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNewLabel.setBounds(10, 11, 330, 28);
+		lblNewLabel.setBounds(10, 95, 330, 28);
 		contentPane.add(lblNewLabel);
 
 		String[] choices = {"CourSeera Options",
@@ -101,7 +106,7 @@ public class UserInterfaceGUI extends JFrame {
 				 };
 		
 		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(0, 78, 318, 201);
+		panel_1.setBounds(0, 89, 318, 182);
 		panel.add(panel_1);
 		panel_1.setLayout(null);
 		
@@ -128,6 +133,42 @@ public class UserInterfaceGUI extends JFrame {
 		btnGroup.add(rdbtnDayOfThe);
 		btnGroup.add(rdbtnNewRadioButton);
 		
+		JPanel panel_3 = new JPanel();
+		panel_3.setBounds(6, 85, 318, 54);
+		panel_1.add(panel_3);
+		panel_3.setLayout(null);
+		
+		txtDdmmyy = new JTextField();
+		txtDdmmyy.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		txtDdmmyy.setToolTipText("dd/mm/yy");
+		txtDdmmyy.setBounds(10, 11, 75, 28);
+		panel_3.add(txtDdmmyy);
+		txtDdmmyy.setColumns(10);
+		
+		textField_1 = new JTextField();
+		textField_1.setToolTipText("dd/mm/yy");
+		textField_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		textField_1.setColumns(10);
+		textField_1.setBounds(108, 11, 75, 28);
+		panel_3.add(textField_1);
+		
+		textField_2 = new JTextField();
+		textField_2.setToolTipText("dd/mm/yy");
+		textField_2.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		textField_2.setColumns(10);
+		textField_2.setBounds(203, 11, 75, 28);
+		panel_3.add(textField_2);
+		
+		JLabel lblNewLabel_2 = new JLabel("/");
+		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblNewLabel_2.setBounds(95, 10, 13, 28);
+		panel_3.add(lblNewLabel_2);
+		
+		JLabel lblNewLabel_2_1 = new JLabel("/");
+		lblNewLabel_2_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblNewLabel_2_1.setBounds(193, 11, 13, 28);
+		panel_3.add(lblNewLabel_2_1);
+		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBounds(6, 85, 302, 46);
 		panel_1.add(panel_2);
@@ -137,18 +178,7 @@ public class UserInterfaceGUI extends JFrame {
 		comboBox_1.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		comboBox_1.setBounds(0, 11, 171, 22);
 		panel_2.add(comboBox_1);
-		
-		JPanel panel_3 = new JPanel();
-		panel_3.setBounds(0, 85, 318, 54);
-		panel_1.add(panel_3);
-		panel_3.setLayout(null);
-		
-		txtDdmmyy = new JTextField();
-		txtDdmmyy.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		txtDdmmyy.setToolTipText("dd/mm/yy");
-		txtDdmmyy.setBounds(10, 11, 286, 28);
-		panel_3.add(txtDdmmyy);
-		txtDdmmyy.setColumns(10);
+		panel_2.setVisible(false);
 
 		
 		
@@ -159,14 +189,13 @@ public class UserInterfaceGUI extends JFrame {
 		
 		textField = new JTextField();
 		textField.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		textField.setBounds(0, 39, 286, 28);
+		textField.setBounds(0, 50, 286, 28);
 		textField.setColumns(10);
 		panel.add(textField);
 		
 		
 		panel_1.setVisible(false);
 		panel.setVisible(false);
-		panel_2.setVisible(false);
 		panel_3.setVisible(false);
 		
 		
@@ -235,15 +264,23 @@ public class UserInterfaceGUI extends JFrame {
 		});
 		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		comboBox.setToolTipText("CourSeera Options...");
-		comboBox.setBounds(10, 61, 327, 22);
+		comboBox.setBounds(10, 134, 327, 22);
 		contentPane.add(comboBox);
-		panel.setBounds(10, 103, 318, 219);
+		panel.setBounds(10, 189, 318, 253);
 		contentPane.add(panel);
 		panel.setLayout(null);
-		JTextArea textArea = new JTextArea();
-		textArea.setBounds(367, 15, 405, 354);
-		contentPane.add(textArea);
+		JTextArea textArea = new JTextArea(22,57);
+		JScrollPane taScroll = new JScrollPane(textArea); 
+		taScroll.setLocation(400, 20);
+		taScroll.setSize( 680, 450 );
+		contentPane.add(taScroll);
+		textArea.setFont(new Font("Calibri", Font.BOLD, 15));
+		
+		 
+		
+		
 		textArea.setEditable(false);
+		
 		
 		
 		
@@ -251,59 +288,87 @@ public class UserInterfaceGUI extends JFrame {
 		JButton btnNewButton = new JButton("Submit");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(comboBox.getSelectedIndex() == 0) {
-					
-				}
-				if(comboBox.getSelectedIndex() == 1) {
-					String[] room = textField.getText().split(" ");
-					IMRoom r = new IMRoom(room[0], room[1]);
-					List<Schedule> sc;
-					if(rdbtnNewRadioButton.isSelected()) {
-						sc = CS.roomSchedule(r);
+				try {
+					if(comboBox.getSelectedIndex() == 0) {
+						
 					}
-					else if(rdbtnDayOfThe.isSelected()) {
-						sc = CS.roomSchedule(r, Interfaces.DayOfWeek.values()[comboBox_1.getSelectedIndex() - 1] );
-					}else {
-						sc = CS.roomSchedule(r );
+					if(comboBox.getSelectedIndex() == 1) {
+						
+							String[] room = textField.getText().split(" ");
+						IMRoom r = new IMRoom(room[0], room[1]);
+						List<Schedule> sc;
+						if(rdbtnNewRadioButton.isSelected()) {
+							
+							LocalDate date = LocalDate.parse(textField_2.getText() + "-" + textField_1.getText() + "-"+txtDdmmyy.getText());
+							
+							sc = CS.roomSchedule(r, date);
+						}
+						else if(rdbtnDayOfThe.isSelected()) {
+							sc = CS.roomSchedule(r, DayOfWeek.values()[comboBox_1.getSelectedIndex() - 1] );
+						}else {
+							sc = CS.roomSchedule(r );
+						}
+						
+						String line = "";
+						 for (Schedule s : sc) {
+							 line += "\n" + s.getInstructor() + " " + s.getCourse() + " " + s.getFromTime() + " " + s.getToTime()+ " " + s.getRoom() +" " + s.getDay() + " \n";
+						 
+						 }
+						 textArea.setText(line);
+						
+						
 					}
-					sc = CS.roomSchedule(r, Interfaces.DayOfWeek.values()[comboBox_1.getSelectedIndex() - 1] );
-					String line = "";
-					 for (Schedule s : sc) {
-						 line += s.getInstructor() + " " + s.getCourse() + " " + s.getFromTime() + " " + s.getToTime()+ " " + s.getRoom() +" " + s.getDay() + " \n";
-					 
-					 }
-					 textArea.setText(line);
+					if(comboBox.getSelectedIndex() == 2) {
+						
+						String[] room = textField.getText().split(" ");
+						IMRoom r = new IMRoom(room[0], room[1]);
+						Schedule sc = CS.whoWasThereLast(r);
+						textArea.setText(sc.getInstructor());
+						
+						
+					}	
+					if(comboBox.getSelectedIndex() == 3) {
+						String[] room = textField.getText().split(" ");
+						IMRoom r = new IMRoom(room[0], room[1]);
+						Schedule sc = CS.whoIsThereNow(r);
+					}
+					if(comboBox.getSelectedIndex() == 4) {
+						String[] prof = textField.getText().split(" ");
+						IMInstructor inst = new IMInstructor(prof[0], prof[1]);
+						List<Schedule> lsc = CS.profSchedule(inst);
+						String line = "";
+						for (Schedule s : lsc) {
+							 line += "\n" + s.getInstructor() + " " + s.getCourse() + " " + s.getFromTime() + " " + s.getToTime()+ " " + s.getRoom() +" " + s.getDay() + " \n";
+						 
+						 }
+						 textArea.setText(line);
+						
+					}
+					if(comboBox.getSelectedIndex() == 5) {
+						String[] prof = textField.getText().split(" ");
+						IMInstructor inst = new IMInstructor(prof[0], prof[1]);
+						Schedule sc = CS.whereIsProf(inst);
+						textArea.setText(sc.getRoom());
+					}
+					if(comboBox.getSelectedIndex() == 6) {
+						String[] prof = textField.getText().split(" ");
+						IMInstructor inst = new IMInstructor(prof[0], prof[1]);
+						List<Schedule> lsc = CS.whereWillProfBe(inst);
+						String line = "";
+						for (Schedule s : lsc) {
+							 line += s.getInstructor() + " " + s.getCourse() + " " + s.getFromTime() + " " + s.getToTime()+ " " + s.getRoom() +" " + s.getDay() + " \n";
+						 
+						 }
+						 textArea.setText(line);
+					}
+				}catch(Exception eee) {
+					textArea.setText("\n\nThere Was Something Wrong In Your Input! \n \n Please Try Again :)");
 				}
-				if(comboBox.getSelectedIndex() == 2) {
-					String[] room = textField.getText().split(" ");
-					IMRoom r = new IMRoom(room[0], room[1]);
-					Schedule sc = CS.whoWasThereLast(r);
-				}	
-				if(comboBox.getSelectedIndex() == 3) {
-					String[] room = textField.getText().split(" ");
-					IMRoom r = new IMRoom(room[0], room[1]);
-					Schedule sc = CS.whoIsThereNow(r);
-				}
-				if(comboBox.getSelectedIndex() == 4) {
-					String[] prof = textField.getText().split(" ");
-					IMInstructor inst = new IMInstructor(prof[0], prof[1]);
-					List<Schedule> lsc = CS.profSchedule(inst);
-					
-				}
-				if(comboBox.getSelectedIndex() == 5) {
-					String[] prof = textField.getText().split(" ");
-					IMInstructor inst = new IMInstructor(prof[0], prof[1]);
-					Schedule sc = CS.whereIsProf(inst);
-				}
-				if(comboBox.getSelectedIndex() == 6) {
-					String[] prof = textField.getText().split(" ");
-					IMInstructor inst = new IMInstructor(prof[0], prof[1]);
-					List<Schedule> lsc = CS.whereWillProfBe(inst);
-				}
+				
 			}
 		});
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnNewButton.setBounds(98, 346, 144, 23);
+		btnNewButton.setBounds(91, 453, 144, 23);
 		contentPane.add(btnNewButton);
 	}
 }
