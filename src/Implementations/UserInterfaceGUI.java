@@ -1,0 +1,270 @@
+package Implementations;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import java.awt.Font;
+import javax.swing.JComboBox;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JTextField;
+import javax.swing.JRadioButton;
+import javax.swing.ButtonGroup;
+import javax.swing.JButton;
+import javax.swing.JTextArea;
+
+public class UserInterfaceGUI extends JFrame {
+
+	private JPanel contentPane;
+	private final JPanel panel = new JPanel();
+	
+	private JTextField textField;
+	private JTextField txtDdmmyy;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					UserInterfaceGUI frame = new UserInterfaceGUI();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public UserInterfaceGUI() {
+		setTitle("CourSeera: Your everyday tool for AUB courses");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 810, 419);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("Please choose an option from the dropdown menu");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblNewLabel.setBounds(10, 11, 330, 28);
+		contentPane.add(lblNewLabel);
+
+		String[] choices = {"CourSeera Options",
+							"Room Schedule", 
+							"Who Was There Last?", 
+							"Who Is There Now?", 
+							"Professor's Schedule", 
+							"Where Is Professor", 
+							"Where Will Professor Be"
+							};
+		String[] days = {"Days Of The Week",
+				 "Monday",
+				 "Tuesday",
+				 "Wednesday",
+			     "Thursday",
+				 "Friday", 
+				 "Saturday"
+				 };
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBounds(0, 78, 318, 201);
+		panel.add(panel_1);
+		panel_1.setLayout(null);
+		
+		JLabel lblNewLabel_1_1 = new JLabel("Optional Options:");
+		lblNewLabel_1_1.setBounds(6, 11, 111, 19);
+		lblNewLabel_1_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		panel_1.add(lblNewLabel_1_1);
+		
+		JRadioButton rdbtnNewRadioButton = new JRadioButton("Specific Date (format: dd/mm/yy)");
+		
+		rdbtnNewRadioButton.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		rdbtnNewRadioButton.setBounds(6, 37, 254, 23);
+		panel_1.add(rdbtnNewRadioButton);
+		
+		JRadioButton rdbtnDayOfThe = new JRadioButton("Day Of The Week");
+		rdbtnDayOfThe.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		rdbtnDayOfThe.setBounds(6, 63, 148, 23);
+		panel_1.add(rdbtnDayOfThe);
+		
+		
+		
+		
+		ButtonGroup btnGroup = new ButtonGroup();
+		btnGroup.add(rdbtnDayOfThe);
+		btnGroup.add(rdbtnNewRadioButton);
+		
+		JPanel panel_2 = new JPanel();
+		panel_2.setBounds(6, 85, 302, 46);
+		panel_1.add(panel_2);
+		panel_2.setLayout(null);
+		
+		JComboBox comboBox_1 = new JComboBox(days);
+		comboBox_1.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		comboBox_1.setBounds(0, 11, 171, 22);
+		panel_2.add(comboBox_1);
+		
+		JPanel panel_3 = new JPanel();
+		panel_3.setBounds(0, 85, 318, 54);
+		panel_1.add(panel_3);
+		panel_3.setLayout(null);
+		
+		txtDdmmyy = new JTextField();
+		txtDdmmyy.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		txtDdmmyy.setToolTipText("dd/mm/yy");
+		txtDdmmyy.setBounds(10, 11, 286, 28);
+		panel_3.add(txtDdmmyy);
+		txtDdmmyy.setColumns(10);
+		
+		
+		
+		
+		
+		
+		JLabel lblNewLabel_1 = new JLabel("Enter Room Name");
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblNewLabel_1.setBounds(0, 11, 298, 28);
+		panel.add(lblNewLabel_1);
+		
+		textField = new JTextField();
+		textField.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		textField.setBounds(0, 39, 286, 28);
+		textField.setColumns(10);
+		panel.add(textField);
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+
+		panel_1.setVisible(false);
+		panel.setVisible(false);
+		panel_2.setVisible(false);
+		panel_3.setVisible(false);
+		
+		
+		
+		
+		rdbtnNewRadioButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(rdbtnNewRadioButton.isSelected()) {
+					panel_2.setVisible(false);
+					panel_3.setVisible(true);
+				}
+				
+				
+			}
+		});
+		rdbtnDayOfThe.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(rdbtnDayOfThe.isSelected()) {
+					panel_2.setVisible(true);
+					panel_3.setVisible(false);
+				}
+				
+				
+			}
+		});
+		
+		
+		JComboBox comboBox = new JComboBox(choices);
+		comboBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(comboBox.getSelectedIndex() == 0) {
+					panel.setVisible(false);
+				}
+				if(comboBox.getSelectedIndex() == 1) {
+					lblNewLabel_1.setText("Enter Room Name");
+					panel.setVisible(true);
+					panel_1.setVisible(true);
+					
+				}
+				if(comboBox.getSelectedIndex() == 2) {
+					lblNewLabel_1.setText("Enter Room Name");
+					panel.setVisible(true);
+					panel_1.setVisible(false);
+				}	
+				if(comboBox.getSelectedIndex() == 3) {
+					lblNewLabel_1.setText("Enter Room Name");
+					panel.setVisible(true);
+					panel_1.setVisible(false);
+				}
+				if(comboBox.getSelectedIndex() == 4) {
+					lblNewLabel_1.setText("Enter Professor Name");
+					panel.setVisible(true);
+					panel_1.setVisible(false);
+				}
+				if(comboBox.getSelectedIndex() == 5) {
+					lblNewLabel_1.setText("Enter Professor Name");
+					panel.setVisible(true);
+					panel_1.setVisible(false);
+				}
+				if(comboBox.getSelectedIndex() == 6) {
+					lblNewLabel_1.setText("Enter Professor Name");
+					panel.setVisible(true);
+					panel_1.setVisible(false);
+				}
+			}
+		});
+		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		comboBox.setToolTipText("CourSeera Options...");
+		comboBox.setBounds(10, 61, 327, 22);
+		contentPane.add(comboBox);
+		panel.setBounds(10, 103, 318, 219);
+		contentPane.add(panel);
+		panel.setLayout(null);
+		JTextArea textArea = new JTextArea();
+		textArea.setBounds(367, 15, 405, 354);
+		contentPane.add(textArea);
+		textArea.setEditable(false);
+		
+		
+		
+		
+		JButton btnNewButton = new JButton("Submit");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				
+				
+				
+				
+				
+				
+				
+			}
+		});
+		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnNewButton.setBounds(98, 346, 144, 23);
+		contentPane.add(btnNewButton);
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	}
+}
