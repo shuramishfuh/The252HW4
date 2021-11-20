@@ -2,11 +2,13 @@ package Implementations;
 
 import Interfaces.*;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -76,7 +78,7 @@ public class IMCourSeera implements Interfaces.CourSeera, Comparator<Schedule> {
         try {
             return roomSchedule().values().stream()
                     .flatMap(List::stream)
-//                    .collect(Collectors.toList()).stream()
+                    .collect(Collectors.toList()).stream()
                     .filter(u -> u.getRoom().equalsIgnoreCase((room.getBuilding().trim() + " " + room.getRoomNumber().trim())))
                     .collect(Collectors.toList());
         } catch (Exception e) {
@@ -135,7 +137,7 @@ public class IMCourSeera implements Interfaces.CourSeera, Comparator<Schedule> {
             } while (!dayOfWeek.equals(dayToMoveBackWards));
 
 
-            if (list.size() != 0) {
+            if (list.size() == 0) {
                 System.out.printf("this room has no classes");
                 return null;
             }
@@ -223,7 +225,6 @@ public class IMCourSeera implements Interfaces.CourSeera, Comparator<Schedule> {
                 .filter(u -> u.getDay().contains(dayOfWeek))
                 .filter(u -> u.getInstructor().equalsIgnoreCase((instructor.getFirstName().trim() + " " + instructor.getLastName().trim())))
                 .collect(Collectors.toList());
-
     }
 
     @Override
