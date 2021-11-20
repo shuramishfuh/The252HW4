@@ -6,10 +6,20 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import Interfaces.CourSeera;
+import Interfaces.CourSeeraFactory;
+import Interfaces.Course;
+import Interfaces.Schedule;
+
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JComboBox;
 import java.awt.event.ActionListener;
+import java.time.DayOfWeek;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Pattern;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import javax.swing.JRadioButton;
@@ -45,6 +55,21 @@ public class UserInterfaceGUI extends JFrame {
 	 * Create the frame.
 	 */
 	public UserInterfaceGUI() {
+		List<Course> courses = new ArrayList<Course>();
+		Initializer.listGenerator(courses);
+		CourSeeraFactory csf = new IMCourSeeraFactory();
+		CourSeera CS = csf.createInstance(courses);
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		setTitle("CourSeera: Your everyday tool for AUB courses");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 810, 419);
@@ -124,10 +149,7 @@ public class UserInterfaceGUI extends JFrame {
 		txtDdmmyy.setBounds(10, 11, 286, 28);
 		panel_3.add(txtDdmmyy);
 		txtDdmmyy.setColumns(10);
-		
-		
-		
-		
+
 		
 		
 		JLabel lblNewLabel_1 = new JLabel("Enter Room Name");
@@ -142,19 +164,6 @@ public class UserInterfaceGUI extends JFrame {
 		panel.add(textField);
 		
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-
 		panel_1.setVisible(false);
 		panel.setVisible(false);
 		panel_2.setVisible(false);
@@ -242,29 +251,59 @@ public class UserInterfaceGUI extends JFrame {
 		JButton btnNewButton = new JButton("Submit");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				
-				
-				
-				
-				
-				
-				
+				if(comboBox.getSelectedIndex() == 0) {
+					
+				}
+				if(comboBox.getSelectedIndex() == 1) {
+					String[] room = textField.getText().split(" ");
+					IMRoom r = new IMRoom(room[0], room[1]);
+					List<Schedule> sc;
+					if(rdbtnNewRadioButton.isSelected()) {
+						sc = CS.roomSchedule(r);
+					}
+					else if(rdbtnDayOfThe.isSelected()) {
+						sc = CS.roomSchedule(r, Interfaces.DayOfWeek.values()[comboBox_1.getSelectedIndex() - 1] );
+					}else {
+						sc = CS.roomSchedule(r );
+					}
+					sc = CS.roomSchedule(r, Interfaces.DayOfWeek.values()[comboBox_1.getSelectedIndex() - 1] );
+					String line = "";
+					 for (Schedule s : sc) {
+						 line += s.getInstructor() + " " + s.getCourse() + " " + s.getFromTime() + " " + s.getToTime()+ " " + s.getRoom() +" " + s.getDay() + " \n";
+					 
+					 }
+					 textArea.setText(line);
+				}
+				if(comboBox.getSelectedIndex() == 2) {
+					String[] room = textField.getText().split(" ");
+					IMRoom r = new IMRoom(room[0], room[1]);
+					Schedule sc = CS.whoWasThereLast(r);
+				}	
+				if(comboBox.getSelectedIndex() == 3) {
+					String[] room = textField.getText().split(" ");
+					IMRoom r = new IMRoom(room[0], room[1]);
+					Schedule sc = CS.whoIsThereNow(r);
+				}
+				if(comboBox.getSelectedIndex() == 4) {
+					String[] prof = textField.getText().split(" ");
+					IMInstructor inst = new IMInstructor(prof[0], prof[1]);
+					List<Schedule> lsc = CS.profSchedule(inst);
+					
+				}
+				if(comboBox.getSelectedIndex() == 5) {
+					String[] prof = textField.getText().split(" ");
+					IMInstructor inst = new IMInstructor(prof[0], prof[1]);
+					Schedule sc = CS.whereIsProf(inst);
+				}
+				if(comboBox.getSelectedIndex() == 6) {
+					String[] prof = textField.getText().split(" ");
+					IMInstructor inst = new IMInstructor(prof[0], prof[1]);
+					List<Schedule> lsc = CS.whereWillProfBe(inst);
+				}
 			}
 		});
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btnNewButton.setBounds(98, 346, 144, 23);
 		contentPane.add(btnNewButton);
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 	}
 }

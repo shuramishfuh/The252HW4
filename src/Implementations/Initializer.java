@@ -25,16 +25,15 @@ public class Initializer {
 		String htmlLink = "";
 		String csvFileName = "src/Data/courses.csv";
 		String pre = new String("https://www-banner.aub.edu.lb/catalog/schd_");
-		char[] letters = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R',
-				'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', };
+		
 
 		System.out.println("Starting!");
-		for (char a : letters) {
-			htmlLink = "src/Data/HTML/" + String.valueOf(a).concat(".html");
-			downloader.downloadHtmlToFile(pre.concat(String.valueOf(a)).concat(".htm"), htmlLink);
-			System.out.println("Page for letter " + String.valueOf(a) + " has been downloaded");
+		for (char i = 'A'; i <= 'Z'; i++) {
+			htmlLink = "src/Data/HTML/" + String.valueOf(i).concat(".html");
+			//downloader.downloadHtmlToFile(pre.concat(String.valueOf(i)).concat(".htm"), htmlLink);
+			//System.out.println("Page for letter " + String.valueOf(i) + " has been downloaded");
 			csvMaker.htmlToCsv(htmlLink, csvFileName, "Fall");
-			System.out.println("Page for letter " + String.valueOf(a) + " has been parsed into csv");
+			System.out.println("Page for letter " + String.valueOf(i) + " has been parsed into csv");
 		}
 		listMaker.csvToDb(courses, csvFileName);
 		System.out.println("Finished!");
