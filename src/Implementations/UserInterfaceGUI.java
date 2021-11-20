@@ -266,7 +266,6 @@ public class UserInterfaceGUI extends JFrame {
 					}else {
 						sc = CS.roomSchedule(r );
 					}
-					sc = CS.roomSchedule(r, Interfaces.DayOfWeek.values()[comboBox_1.getSelectedIndex() - 1] );
 					String line = "";
 					 for (Schedule s : sc) {
 						 line += s.getInstructor() + " " + s.getCourse() + " " + s.getFromTime() + " " + s.getToTime()+ " " + s.getRoom() +" " + s.getDay() + " \n";

@@ -76,7 +76,7 @@ public class IMCourSeera implements Interfaces.CourSeera, Comparator<Schedule> {
         try {
             return roomSchedule().values().stream()
                     .flatMap(List::stream)
-//                    .collect(Collectors.toList()).stream()
+                    .collect(Collectors.toList()).stream()
                     .filter(u -> u.getRoom().equalsIgnoreCase((room.getBuilding().trim() + " " + room.getRoomNumber().trim())))
                     .collect(Collectors.toList());
         } catch (Exception e) {
@@ -102,7 +102,7 @@ public class IMCourSeera implements Interfaces.CourSeera, Comparator<Schedule> {
                 .flatMap(List::stream)
                 .collect(Collectors.toList()).stream()
                 .filter(u -> u.getRoom().equalsIgnoreCase((room.getBuilding().trim() + " " + room.getRoomNumber().trim())))
-                .filter(u -> u.getDay().contains(day))
+                .filter(u -> u.getDay().equals(day))
                 .collect(Collectors.toList());
     }
 
@@ -135,7 +135,7 @@ public class IMCourSeera implements Interfaces.CourSeera, Comparator<Schedule> {
             } while (!dayOfWeek.equals(dayToMoveBackWards));
 
 
-            if (list.size() != 0) {
+            if (list.size() == 0) {
                 System.out.printf("this room has no classes");
                 return null;
             }
