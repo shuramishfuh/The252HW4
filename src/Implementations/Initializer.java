@@ -32,7 +32,7 @@ public class Initializer {
 			htmlLink = "src/Data/HTML/" + String.valueOf(i).concat(".html");
 			//downloader.downloadHtmlToFile(pre.concat(String.valueOf(i)).concat(".htm"), htmlLink);
 			//System.out.println("Page for letter " + String.valueOf(i) + " has been downloaded");
-			csvMaker.htmlToCsv(htmlLink, csvFileName, "Fall");
+			csvMaker.htmlToCsv(htmlLink, csvFileName);
 			System.out.println("Page for letter " + String.valueOf(i) + " has been parsed into csv");
 		}
 		listMaker.csvToDb(courses, csvFileName);
