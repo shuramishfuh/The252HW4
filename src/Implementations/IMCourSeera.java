@@ -9,12 +9,11 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
 
-public class IMCourSeera implements Interfaces.CourSeera, Comparator<Schedule> {
+public class IMCourSeera implements Interfaces.CourSeera{//, Comparator<Schedule> {
     private TreeMap<Room, List<Schedule>> roomSchedule;
 
     /*
@@ -72,15 +71,12 @@ public class IMCourSeera implements Interfaces.CourSeera, Comparator<Schedule> {
      * returns schedule of a particular room
      */
     public List<Schedule> roomSchedule(Room room) {
-        try {
             return roomSchedule().values().stream()
                 .flatMap(List::stream)
                 .collect(Collectors.toList()).stream()
                 .filter(u -> u.getRoom().equalsIgnoreCase((room.getBuilding().trim() + " " + room.getRoomNumber().trim())))
                 .collect(Collectors.toList());
-        } catch (Exception e) {
-            return null;
-        }
+        
     }
 
     @Override
@@ -110,7 +106,7 @@ public class IMCourSeera implements Interfaces.CourSeera, Comparator<Schedule> {
         java.time.DayOfWeek dayToMoveBackWards = dayOfWeek;
         Schedule schedule;
         List<Schedule> list;
-        try {
+        
             do {
                 LocalTime finalTime = time;
                 java.time.DayOfWeek finalDayToMoveBackWards = dayToMoveBackWards;
@@ -135,10 +131,7 @@ public class IMCourSeera implements Interfaces.CourSeera, Comparator<Schedule> {
             }
             schedule = list.get(list.size() - 1);
             return schedule;
-        } catch (Exception e) {
-            System.out.println("this class does not exist ");
-            return null;
-        }
+        
     }
 
     @Override
@@ -147,7 +140,6 @@ public class IMCourSeera implements Interfaces.CourSeera, Comparator<Schedule> {
         LocalDate localDate = LocalDate.now();
         java.time.DayOfWeek dayOfWeek = localDate.getDayOfWeek();
         LocalTime time = LocalTime.parse(dtf.format(localDate));
-        try {
             return roomSchedule().values().stream().flatMap(List::stream)
                     .collect(Collectors.toList()).stream()
                     .filter(u -> u.getDay().contains(dayOfWeek))
@@ -155,9 +147,6 @@ public class IMCourSeera implements Interfaces.CourSeera, Comparator<Schedule> {
                             .equalsIgnoreCase((room.getBuilding().trim() + " " + room.getRoomNumber().trim())))
                     .filter(t -> t.getFromTime().isBefore(time) && t.getToTime().isAfter(time))
                     .collect(Collectors.toList()).get(0);
-        } catch (Exception e) {
-            return null;
-        }
     }
 
     @Override
@@ -188,7 +177,6 @@ public class IMCourSeera implements Interfaces.CourSeera, Comparator<Schedule> {
         LocalTime time = LocalTime.parse(dtf.format(localDate));
         java.time.DayOfWeek dayOfWeek = localDate.getDayOfWeek();
 
-        try {
             return roomSchedule().values().stream()
                     .flatMap(List::stream)
                     .collect(Collectors.toList()).stream()
@@ -197,10 +185,6 @@ public class IMCourSeera implements Interfaces.CourSeera, Comparator<Schedule> {
                             (instructor.getFirstName().trim() + " " + instructor.getLastName().trim())))
                     .filter(t -> t.getFromTime().isBefore(time) && t.getToTime().isAfter(time))
                     .collect(Collectors.toList()).get(0);
-        } catch (Exception e) {
-            return null;
-        }
-
     }
 
     @Override
@@ -221,8 +205,8 @@ public class IMCourSeera implements Interfaces.CourSeera, Comparator<Schedule> {
                 .collect(Collectors.toList());
     }
 
-    @Override
-    public int compare(Schedule o1, Schedule o2) {
-        return o1.getToTime().compareTo(o2.getToTime());
-    }
+    //@Override
+    // public int compare(Schedule o1, Schedule o2) {
+    //     return o1.getToTime().compareTo(o2.getToTime());
+    // }
 }
