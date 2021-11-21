@@ -9,12 +9,10 @@ import java.util.List;
 
 
 public class IMHtmlToCsv implements Interfaces.HtmlToCsv {
-    private List<String> semesters = new ArrayList<String>(Arrays.asList("Fall","Spring"));
 	@Override
-    public void htmlToCsv(String htmlFile, String csvFile, String semester) {
+    public void htmlToCsv(String htmlFile, String csvFile) {
 
         try {
-			semesters.remove(semester);
             FileWriter myWriter = new FileWriter(csvFile, true);
             String line = "";
             String html = Files.readString(Path.of(htmlFile));
