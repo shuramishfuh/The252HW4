@@ -8,3 +8,5 @@ bin/
 *.ipr
 *.iws
 out/
+*.jar
+*.json

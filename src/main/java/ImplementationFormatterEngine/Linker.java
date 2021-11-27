@@ -5,12 +5,10 @@ import Implementations.IMRoom;
 import Implementations.Initializer;
 import Interfaces.*;
 import InterfacesformatterEngine.ILinker;
-import InterfacesformatterEngine.IoutputFormatter;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.TreeMap;
 
 public class Linker implements ILinker {
@@ -23,21 +21,25 @@ public class Linker implements ILinker {
         CourSeeraFactory csf = new IMCourSeeraFactory();
         CourSeera CS = csf.createInstance(courses);
 
-        String method = Ls.get(0).toLowerCase();
-        IoutputFormatter formatter = new outPutFormatter();
-
         TreeMap<String, List<Schedule>> methodAndList = new TreeMap<>();
+
+        String method = Ls.get(0).toLowerCase();
 
         switch (method) {
             case "roomschedule":
-                if (Ls.size() == 2) {
-                    return (TreeMap<String, List<Schedule>>) methodAndList.put(method, CS.roomSchedule(new IMRoom(Ls.get(1).toLowerCase(), Ls.get(2).toLowerCase())));
+                if (Ls.size() == 3) {
+                    List<Schedule> sh = CS.roomSchedule(new IMRoom(Ls.get(1).toLowerCase(), Ls.get(2).toLowerCase()));
+                    methodAndList.put(method, sh);
+                    return methodAndList;
                 }
 
                 if (Character.isDigit(Ls.get(3).charAt(0))) {
                     try {
                         LocalDate date = LocalDate.parse(Ls.get(3));
-                        return (TreeMap<String, List<Schedule>>) methodAndList.put(method,CS.roomSchedule(new IMRoom(Ls.get(1).toLowerCase(), Ls.get(2).toLowerCase()),date));
+                        List<Schedule> sh = CS
+                                .roomSchedule(new IMRoom(Ls.get(1).toLowerCase(), Ls.get(2).toLowerCase()), date);
+                        methodAndList.put(method, sh);
+                        return methodAndList;
                     } catch (Exception e) {
                         System.out.println(e);
                         return null;
@@ -45,7 +47,10 @@ public class Linker implements ILinker {
                 }
                 try {
                     java.time.DayOfWeek day = java.time.DayOfWeek.valueOf(Ls.get(3).toUpperCase());
-                    return (TreeMap<String, List<Schedule>>) methodAndList.put(method,CS.roomSchedule(new IMRoom(Ls.get(1).toLowerCase(), Ls.get(2).toLowerCase()),day));
+                    List<Schedule> sh = CS.roomSchedule(new IMRoom(Ls.get(1).toLowerCase(), Ls.get(2).toLowerCase()),
+                            day);
+                    methodAndList.put(method, sh);
+                    return methodAndList;
                 } catch (Exception e) {
                     System.out.println(e);
                     return null;

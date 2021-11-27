@@ -42,7 +42,7 @@ public class IMSchedule implements Interfaces.Schedule {
     }
 
     public String getCourse() {
-        return this.Course.getSubject() +" "+this.Course.getCourse_num()+ " " + " section "  +this.Course.getSection() +" " + this.Course.getTitle();
+        return this.Course.getSubject() + " " + this.Course.getCourse_num() + " " + " Section "  + this.Course.getSection() + " " + this.Course.getTitle();
     }
 
     @Override
