@@ -20,17 +20,13 @@ public class TBot extends TelegramLongPollingBot {
 
             IinputParser iinputParser = new InputParser();
             String receivedText = update.getMessage().getText();
-            var result = iinputParser.convertStringToInstruction(receivedText);
             ILinker linker = new Linker();
-            var output = linker.callCoursera(result);
             IoutputFormatter formatter = new outPutFormatter();
-            var ourMessage =   formatter.selctor(output);
 
             // send a reply
             SendMessage message = new SendMessage();
             message.setChatId(update.getMessage().getChatId().toString());
-            message.setText(ourMessage);
-            System.out.printf(ourMessage);
+            message.setText( formatter.selctor(linker.callCoursera(iinputParser.convertStringToInstruction(receivedText))));
             try {
                 execute(message);
             } catch (TelegramApiException e) {
