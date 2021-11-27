@@ -285,12 +285,13 @@ public class UserInterfaceGUI extends JFrame {
 						String[] room = textField.getText().split(" ");
 						IMRoom r = new IMRoom(room[0], room[1]);
 						Schedule sc = CS.whoWasThereLast(r);
-						textArea.setText(sc.getInstructor() +" " + sc+" "+ sc.getCourse());
+						textArea.setText(sc.getInstructor() +" "+ sc.getCourse());
 					}	
 					if(comboBox.getSelectedIndex() == 3) {
 						String[] room = textField.getText().split(" ");
 						IMRoom r = new IMRoom(room[0], room[1]);
 						Schedule sc = CS.whoIsThereNow(r);
+						textArea.setText(sc.getInstructor() +" "+ sc.getCourse());
 					}
 					if(comboBox.getSelectedIndex() == 4) {
 						String[] prof = textField.getText().split(" ");

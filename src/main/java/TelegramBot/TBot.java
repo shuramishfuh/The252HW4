@@ -1,10 +1,16 @@
 package TelegramBot;
 
+import ImplementationFormatterEngine.InputParser;
+import ImplementationFormatterEngine.Linker;
+import ImplementationFormatterEngine.outPutFormatter;
 import Implementations.IMCourSeeraFactory;
 import Implementations.Initializer;
 import Interfaces.CourSeera;
 import Interfaces.CourSeeraFactory;
 import Interfaces.Course;
+import InterfacesformatterEngine.ILinker;
+import InterfacesformatterEngine.IinputParser;
+import InterfacesformatterEngine.IoutputFormatter;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
@@ -18,14 +24,20 @@ public class TBot extends TelegramLongPollingBot {
         // if there is a message that has text
         if (update.hasMessage() && update.getMessage().hasText()) {
             // get the text of the message
-            String receivedText = "I reveived : \n " + update.getMessage().getText();
 
-
+            IinputParser iinputParser = new InputParser();
+            String receivedText = update.getMessage().getText();
+            var result = iinputParser.convertStringToInstruction(receivedText);
+            ILinker linker = new Linker();
+            var output = linker.callCoursera(result);
+            IoutputFormatter formatter = new outPutFormatter();
+            var ourMessage =   formatter.selctor(output);
 
             // send a reply
             SendMessage message = new SendMessage();
             message.setChatId(update.getMessage().getChatId().toString());
-            message.setText(receivedText);
+            message.setText(ourMessage);
+            System.out.printf(ourMessage);
             try {
                 execute(message);
             } catch (TelegramApiException e) {

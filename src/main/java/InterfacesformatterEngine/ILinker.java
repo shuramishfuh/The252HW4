@@ -3,7 +3,8 @@ package InterfacesformatterEngine;
 import Interfaces.Schedule;
 
 import java.util.List;
+import java.util.TreeMap;
 
 public interface ILinker {
-    List<Schedule> callCoursera(List<String> Ls);
+    TreeMap<String, List<Schedule>> callCoursera(List<String> Ls);
 }
