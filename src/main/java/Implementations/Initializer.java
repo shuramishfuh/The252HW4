@@ -26,9 +26,6 @@ public class Initializer {
 		String csvFileName = "src/Data/courses.csv";
 		String pre = new String("https://www-banner.aub.edu.lb/catalog/schd_");
 
-
-		var a = Htmlfolder.listFiles().length;
-
 		if (Htmlfolder.listFiles().length == 0) {
 			System.out.println("Starting!");
 			for (char i = 'A'; i <= 'Z'; i++) {
