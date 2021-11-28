@@ -19,6 +19,8 @@ public class outPutFormatter implements IoutputFormatter {
         if (methodAndList.firstKey().equalsIgnoreCase("invalid room"))
             return methodAndList.firstKey();
 
+        if (methodAndList.firstKey().equalsIgnoreCase("invalid day of week"))
+            return methodAndList.firstKey();
 
         switch (methodAndList.firstKey()) {
             case "whereisprof":

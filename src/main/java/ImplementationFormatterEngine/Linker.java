@@ -43,7 +43,7 @@ public class Linker implements ILinker {
                         try {
                             date = LocalDate.parse(Ls.get(3));
                         } catch (Exception e) {
-                            String error = "Invalid date";
+                            String error = "Invalid Date";
                             methodAndList.put(error, null);
                             return methodAndList;
                         }
@@ -58,17 +58,28 @@ public class Linker implements ILinker {
                             methodAndList.put(error, null);
                             return methodAndList;
                         }
-                       
+
                     }
 
-                    try {
-                        java.time.DayOfWeek day = java.time.DayOfWeek.valueOf(Ls.get(3).toUpperCase());
-                        List<Schedule> sh = CS
-                                .roomSchedule(new IMRoom(Ls.get(1).toLowerCase(), Ls.get(2).toLowerCase()), day);
-                        methodAndList.put(method, sh);
-                        return methodAndList;
-                    } catch (Exception e) {
-                        return null;
+                    if ((Character.isLetter(Ls.get(3).charAt(0)))) {
+                        java.time.DayOfWeek day = null;
+                        try {
+                            day = java.time.DayOfWeek.valueOf(Ls.get(3).toUpperCase());
+                        } catch (Exception e) {
+                            String error = "Invalid Day of Week";
+                            methodAndList.put(error, null);
+                            return methodAndList;
+                        }
+                        try {
+                            List<Schedule> sh = CS
+                                    .roomSchedule(new IMRoom(Ls.get(1).toLowerCase(), Ls.get(2).toLowerCase()), day);
+                            methodAndList.put(method, sh);
+                            return methodAndList;
+                        } catch (Exception e) {
+                            String error = "Invalid Room";
+                            methodAndList.put(error, null);
+                            return methodAndList;
+                        }
                     }
                 }
 
