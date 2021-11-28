@@ -26,7 +26,7 @@ public class TBot extends TelegramLongPollingBot {
             // send a reply
             SendMessage message = new SendMessage();
             message.setChatId(update.getMessage().getChatId().toString());
-            message.setText( formatter.selctor(linker.callCoursera(iinputParser.convertStringToInstruction(receivedText))));
+            message.setText( formatter.selector(linker.callCoursera(iinputParser.convertStringToInstruction(receivedText))));
             try {
                 execute(message);
             } catch (TelegramApiException e) {
