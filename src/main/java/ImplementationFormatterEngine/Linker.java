@@ -1,6 +1,7 @@
 package ImplementationFormatterEngine;
 
 import Implementations.IMCourSeeraFactory;
+import Implementations.IMInstructor;
 import Implementations.IMRoom;
 import Implementations.Initializer;
 import Interfaces.*;
@@ -8,6 +9,7 @@ import InterfacesformatterEngine.ILinker;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.TreeMap;
 
@@ -25,37 +27,92 @@ public class Linker implements ILinker {
 
         String method = Ls.get(0).toLowerCase();
 
-        switch (method) {
-            case "roomschedule":
-                if (Ls.size() == 3) {
-                    List<Schedule> sh = CS.roomSchedule(new IMRoom(Ls.get(1).toLowerCase(), Ls.get(2).toLowerCase()));
+        try {
+            switch (method) {
+                case "roomschedule": {
+                    if (Ls.size() == 3) {
+                        List<Schedule> sh = CS
+                                .roomSchedule(new IMRoom(Ls.get(1).toLowerCase(), Ls.get(2).toLowerCase()));
+                        methodAndList.put(method, sh);
+                        return methodAndList;
+                    }
+
+                    if (Character.isDigit(Ls.get(3).charAt(0))) {
+                        LocalDate date = null;
+
+                        try {
+                            date = LocalDate.parse(Ls.get(3));
+                        } catch (Exception e) {
+                            String error = "Invalid date";
+                            methodAndList.put(error, null);
+                            return methodAndList;
+                        }
+
+                        try {
+                            List<Schedule> sh = CS
+                                    .roomSchedule(new IMRoom(Ls.get(1).toLowerCase(), Ls.get(2).toLowerCase()), date);
+                            methodAndList.put(method, sh);
+                            return methodAndList;
+                        } catch (Exception e) {
+                            String error = "Invalid Room";
+                            methodAndList.put(error, null);
+                            return methodAndList;
+                        }
+                       
+                    }
+
+                    try {
+                        java.time.DayOfWeek day = java.time.DayOfWeek.valueOf(Ls.get(3).toUpperCase());
+                        List<Schedule> sh = CS
+                                .roomSchedule(new IMRoom(Ls.get(1).toLowerCase(), Ls.get(2).toLowerCase()), day);
+                        methodAndList.put(method, sh);
+                        return methodAndList;
+                    } catch (Exception e) {
+                        return null;
+                    }
+                }
+
+                case "whowastherelast": {
+                    Schedule s = CS.whoWasThereLast(new IMRoom(Ls.get(1).toLowerCase(), Ls.get(2).toLowerCase()));
+                    List<Schedule> sh = new ArrayList<>(Arrays.asList(s));
                     methodAndList.put(method, sh);
                     return methodAndList;
                 }
 
-                if (Character.isDigit(Ls.get(3).charAt(0))) {
-                    try {
-                        LocalDate date = LocalDate.parse(Ls.get(3));
-                        List<Schedule> sh = CS
-                                .roomSchedule(new IMRoom(Ls.get(1).toLowerCase(), Ls.get(2).toLowerCase()), date);
-                        methodAndList.put(method, sh);
-                        return methodAndList;
-                    } catch (Exception e) {
-                        System.out.println(e);
-                        return null;
-                    }
-                }
-                try {
-                    java.time.DayOfWeek day = java.time.DayOfWeek.valueOf(Ls.get(3).toUpperCase());
-                    List<Schedule> sh = CS.roomSchedule(new IMRoom(Ls.get(1).toLowerCase(), Ls.get(2).toLowerCase()),
-                            day);
+                case "whoistherenow": {
+                    Schedule s = CS.whoIsThereNow(new IMRoom(Ls.get(1).toLowerCase(), Ls.get(2).toLowerCase()));
+                    List<Schedule> sh = new ArrayList<>(Arrays.asList(s));
                     methodAndList.put(method, sh);
                     return methodAndList;
-                } catch (Exception e) {
-                    System.out.println(e);
-                    return null;
                 }
+
+                case "profschedule": {
+                    List<Schedule> sh = CS
+                            .profSchedule(new IMInstructor(Ls.get(1).toLowerCase(), Ls.get(2).toLowerCase()));
+                    methodAndList.put(method, sh);
+                    return methodAndList;
+                }
+
+                case "whereisprof": {
+                    Schedule s = CS.whereIsProf(new IMInstructor(Ls.get(1).toLowerCase(), Ls.get(2).toLowerCase()));
+                    List<Schedule> sh = new ArrayList<>(Arrays.asList(s));
+                    methodAndList.put(method, sh);
+                    return methodAndList;
+                }
+
+                case "wherewillprofbe": {
+                    List<Schedule> sh = CS
+                            .whereWillProfBe(new IMInstructor(Ls.get(1).toLowerCase(), Ls.get(2).toLowerCase()));
+                    methodAndList.put(method, sh);
+                    return methodAndList;
+                }
+
+                default:
+                    return null;
+            }
+
+        } catch (Exception e) {
+            return null;
         }
-        return null;
     }
 }

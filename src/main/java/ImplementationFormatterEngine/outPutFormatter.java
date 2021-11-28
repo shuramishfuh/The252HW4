@@ -12,6 +12,14 @@ public class outPutFormatter implements IoutputFormatter {
 
     @Override
     public String selctor(TreeMap<String, List<Schedule>> methodAndList) {
+
+        if (methodAndList.firstKey().equalsIgnoreCase("invalid date"))
+            return methodAndList.firstKey();
+        
+        if (methodAndList.firstKey().equalsIgnoreCase("invalid room"))
+            return methodAndList.firstKey();
+
+
         switch (methodAndList.firstKey()) {
             case "whereisprof":
             case "whoIstherenow":
