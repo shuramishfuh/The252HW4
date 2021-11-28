@@ -8,6 +8,7 @@ import Interfaces.*;
 import InterfacesformatterEngine.ILinker;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -41,7 +42,8 @@ public class Linker implements ILinker {
                         LocalDate date = null;
 
                         try {
-                            date = LocalDate.parse(Ls.get(3));
+                            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/y");
+                            date = LocalDate.parse(Ls.get(3), formatter);
                         } catch (Exception e) {
                             String error = "Invalid Date";
                             methodAndList.put(error, null);
@@ -58,7 +60,6 @@ public class Linker implements ILinker {
                             methodAndList.put(error, null);
                             return methodAndList;
                         }
-
                     }
 
                     if ((Character.isLetter(Ls.get(3).charAt(0)))) {
