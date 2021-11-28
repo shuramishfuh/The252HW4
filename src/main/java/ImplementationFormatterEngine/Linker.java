@@ -32,10 +32,17 @@ public class Linker implements ILinker {
             switch (method) {
                 case "roomschedule": {
                     if (Ls.size() == 3) {
-                        List<Schedule> sh = CS
-                                .roomSchedule(new IMRoom(Ls.get(1).toLowerCase(), Ls.get(2).toLowerCase()));
-                        methodAndList.put(method, sh);
-                        return methodAndList;
+                        try {
+                            List<Schedule> sh = CS
+                                    .roomSchedule(new IMRoom(Ls.get(1).toLowerCase(), Ls.get(2).toLowerCase()));
+                            methodAndList.put(method, sh);
+                            return methodAndList;
+                        } catch (Exception e) {
+                            String error = "Invalid Room";
+                            methodAndList.put(error, null);
+                            return methodAndList;
+                        }
+
                     }
 
                     if (Character.isDigit(Ls.get(3).charAt(0))) {
@@ -85,42 +92,78 @@ public class Linker implements ILinker {
                 }
 
                 case "whowastherelast": {
-                    Schedule s = CS.whoWasThereLast(new IMRoom(Ls.get(1).toLowerCase(), Ls.get(2).toLowerCase()));
-                    List<Schedule> sh = new ArrayList<>(Arrays.asList(s));
-                    methodAndList.put(method, sh);
-                    return methodAndList;
+                    try {
+                        Schedule s = CS.whoWasThereLast(new IMRoom(Ls.get(1).toLowerCase(), Ls.get(2).toLowerCase()));
+                        List<Schedule> sh = new ArrayList<>(Arrays.asList(s));
+                        methodAndList.put(method, sh);
+                        return methodAndList;
+                    } catch (Exception e) {
+                        String error = "Invalid Room";
+                        methodAndList.put(error, null);
+                        return methodAndList;
+                    }
                 }
 
                 case "whoistherenow": {
-                    Schedule s = CS.whoIsThereNow(new IMRoom(Ls.get(1).toLowerCase(), Ls.get(2).toLowerCase()));
-                    List<Schedule> sh = new ArrayList<>(Arrays.asList(s));
-                    methodAndList.put(method, sh);
-                    return methodAndList;
+                    try {
+                        Schedule s = CS.whoIsThereNow(new IMRoom(Ls.get(1).toLowerCase(), Ls.get(2).toLowerCase()));
+                        List<Schedule> sh = new ArrayList<>(Arrays.asList(s));
+                        methodAndList.put(method, sh);
+                        return methodAndList;
+
+                    } catch (Exception e) {
+                        String error = "Invalid Room";
+                        methodAndList.put(error, null);
+                        return methodAndList;
+                    }
                 }
 
                 case "profschedule": {
-                    List<Schedule> sh = CS
-                            .profSchedule(new IMInstructor(Ls.get(1).toLowerCase(), Ls.get(2).toLowerCase()));
-                    methodAndList.put(method, sh);
-                    return methodAndList;
+                    try {
+                        List<Schedule> sh = CS
+                                .profSchedule(new IMInstructor(Ls.get(1).toLowerCase(), Ls.get(2).toLowerCase()));
+                        methodAndList.put(method, sh);
+                        return methodAndList;
+                    } catch (Exception e) {
+                        String error = "Invalid Professor Name";
+                        methodAndList.put(error, null);
+                        return methodAndList;
+                    }
+
                 }
 
                 case "whereisprof": {
-                    Schedule s = CS.whereIsProf(new IMInstructor(Ls.get(1).toLowerCase(), Ls.get(2).toLowerCase()));
-                    List<Schedule> sh = new ArrayList<>(Arrays.asList(s));
-                    methodAndList.put(method, sh);
-                    return methodAndList;
+                    try {
+                        Schedule s = CS.whereIsProf(new IMInstructor(Ls.get(1).toLowerCase(), Ls.get(2).toLowerCase()));
+                        List<Schedule> sh = new ArrayList<>(Arrays.asList(s));
+                        methodAndList.put(method, sh);
+                        return methodAndList;
+                    } catch (Exception e) {
+                        String error = "Invalid Professor Name";
+                        methodAndList.put(error, null);
+                        return methodAndList;
+                    }
+
                 }
 
                 case "wherewillprofbe": {
-                    List<Schedule> sh = CS
-                            .whereWillProfBe(new IMInstructor(Ls.get(1).toLowerCase(), Ls.get(2).toLowerCase()));
-                    methodAndList.put(method, sh);
-                    return methodAndList;
+                    try {
+                        List<Schedule> sh = CS
+                                .whereWillProfBe(new IMInstructor(Ls.get(1).toLowerCase(), Ls.get(2).toLowerCase()));
+                        methodAndList.put(method, sh);
+                        return methodAndList;
+                    } catch (Exception e) {
+                        String error = "Invalid Professor Name";
+                        methodAndList.put(error, null);
+                        return methodAndList;
+                    }
+
                 }
 
                 default:
-                    return null;
+                    String error = "Invalid Command";
+                    methodAndList.put(error, null);
+                    return methodAndList;
             }
 
         } catch (Exception e) {

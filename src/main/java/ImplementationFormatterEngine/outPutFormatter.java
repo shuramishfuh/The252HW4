@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 public class outPutFormatter implements IoutputFormatter {
 
     @Override
-    public String selctor(TreeMap<String, List<Schedule>> methodAndList) {
+    public String selector(TreeMap<String, List<Schedule>> methodAndList) {
 
         if (methodAndList.firstKey().equalsIgnoreCase("invalid date"))
             return methodAndList.firstKey();
@@ -20,12 +20,18 @@ public class outPutFormatter implements IoutputFormatter {
 
         if (methodAndList.firstKey().equalsIgnoreCase("invalid day of week"))
             return methodAndList.firstKey();
-
+        
+        if (methodAndList.firstKey().equalsIgnoreCase("invalid professor name"))
+            return methodAndList.firstKey();
+        
+        if (methodAndList.firstKey().equalsIgnoreCase("invalid command"))
+            return methodAndList.firstKey();
+        
         switch (methodAndList.firstKey()) {
             case "whereisprof":
-            case "whoIstherenow":
-            case "whoWastherelast":
-                return scheduleToString(methodAndList.get(methodAndList.firstKey()));
+            case "whoistherenow":
+            case "whowastherelast":
+                return scheduleToString(methodAndList.get(methodAndList.firstKey()).get(0));
             default:
                 return scheduleToString(
                         methodAndList.values().stream().flatMap(List::stream).collect(Collectors.toList()));
