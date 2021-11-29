@@ -34,8 +34,8 @@ public class Linker implements ILinker {
                     if (Ls.size() == 3) {
                         try {
                             List<Schedule> sh = CS
-                                    .roomSchedule(new IMRoom(Ls.get(ConstantVariables.RoomBuilding).toLowerCase(),
-                                            Ls.get(ConstantVariables.RoomNumber).toLowerCase()));
+                                    .roomSchedule(new IMRoom(Ls.get(ConstantVariables.RoomBuilding).toUpperCase(),
+                                            Ls.get(ConstantVariables.RoomNumber).toUpperCase()));
 
                             if (sh.isEmpty())
                                 throw new IllegalArgumentException();
@@ -64,13 +64,14 @@ public class Linker implements ILinker {
 
                         try {
                             List<Schedule> sh = CS
-                                    .roomSchedule(new IMRoom(Ls.get(ConstantVariables.RoomBuilding).toLowerCase(),
-                                            Ls.get(ConstantVariables.RoomNumber).toLowerCase()), date);
-
-                            if (sh.isEmpty())
-                                throw new IllegalArgumentException();
+                                    .roomSchedule(new IMRoom(Ls.get(ConstantVariables.RoomBuilding).toUpperCase(),
+                                            Ls.get(ConstantVariables.RoomNumber).toUpperCase()), date);
 
                             methodAndList.put(method, sh);
+                            return methodAndList;
+                        } catch (IllegalStateException e) {
+                            String error = ConstantVariables.NoClassesThisDate;
+                            methodAndList.put(error, null);
                             return methodAndList;
                         } catch (Exception e) {
                             String error = ConstantVariables.InvalidRoom;
@@ -90,13 +91,14 @@ public class Linker implements ILinker {
                         }
                         try {
                             List<Schedule> sh = CS
-                                    .roomSchedule(new IMRoom(Ls.get(ConstantVariables.RoomBuilding).toLowerCase(),
-                                            Ls.get(ConstantVariables.RoomNumber).toLowerCase()), day);
-
-                            if (sh.isEmpty())
-                                throw new IllegalArgumentException();
+                                    .roomSchedule(new IMRoom(Ls.get(ConstantVariables.RoomBuilding).toUpperCase(),
+                                            Ls.get(ConstantVariables.RoomNumber).toUpperCase()), day);
 
                             methodAndList.put(method, sh);
+                            return methodAndList;
+                        } catch (IllegalStateException e) {
+                            String error = ConstantVariables.NoClassesThisDay;
+                            methodAndList.put(error, null);
                             return methodAndList;
                         } catch (Exception e) {
                             String error = ConstantVariables.InvalidRoom;
@@ -108,8 +110,8 @@ public class Linker implements ILinker {
 
                 case ConstantVariables.WhoWasThereLast: {
                     try {
-                        Schedule s = CS.whoWasThereLast(new IMRoom(Ls.get(ConstantVariables.RoomBuilding).toLowerCase(),
-                                Ls.get(ConstantVariables.RoomNumber).toLowerCase()));
+                        Schedule s = CS.whoWasThereLast(new IMRoom(Ls.get(ConstantVariables.RoomBuilding).toUpperCase(),
+                                Ls.get(ConstantVariables.RoomNumber).toUpperCase()));
                         List<Schedule> sh = new ArrayList<>(Arrays.asList(s));
                         methodAndList.put(method, sh);
                         return methodAndList;
@@ -122,8 +124,8 @@ public class Linker implements ILinker {
 
                 case ConstantVariables.WhoIsThereNow: {
                     try {
-                        Schedule s = CS.whoIsThereNow(new IMRoom(Ls.get(ConstantVariables.RoomBuilding),
-                                Ls.get(ConstantVariables.RoomNumber)));
+                        Schedule s = CS.whoIsThereNow(new IMRoom(Ls.get(ConstantVariables.RoomBuilding).toUpperCase(),
+                                Ls.get(ConstantVariables.RoomNumber).toUpperCase()));
                         List<Schedule> sh = new ArrayList<>(Arrays.asList(s));
                         methodAndList.put(method, sh);
                         return methodAndList;
@@ -143,8 +145,8 @@ public class Linker implements ILinker {
                     try {
                         List<Schedule> sh = CS
                                 .profSchedule(
-                                        new IMInstructor(Ls.get(ConstantVariables.InstructorFirstName).toLowerCase(),
-                                                Ls.get(ConstantVariables.InstructorLastname).toLowerCase()));
+                                        new IMInstructor(Ls.get(ConstantVariables.InstructorFirstName),
+                                                Ls.get(ConstantVariables.InstructorLastname)));
 
                         if (sh.isEmpty())
                             throw new IllegalArgumentException();
@@ -161,8 +163,8 @@ public class Linker implements ILinker {
                 case ConstantVariables.WhereIsProf: {
                     try {
                         Schedule s = CS.whereIsProf(
-                                new IMInstructor(Ls.get(ConstantVariables.InstructorFirstName).toLowerCase(),
-                                        Ls.get(ConstantVariables.InstructorLastname).toLowerCase()));
+                                new IMInstructor(Ls.get(ConstantVariables.InstructorFirstName),
+                                        Ls.get(ConstantVariables.InstructorLastname)));
                         List<Schedule> sh = new ArrayList<>(Arrays.asList(s));
 
                         methodAndList.put(method, sh);
@@ -182,8 +184,8 @@ public class Linker implements ILinker {
                     try {
                         List<Schedule> sh = CS
                                 .whereWillProfBe(
-                                        new IMInstructor(Ls.get(ConstantVariables.InstructorFirstName).toLowerCase(),
-                                                Ls.get(ConstantVariables.InstructorLastname).toLowerCase()));
+                                        new IMInstructor(Ls.get(ConstantVariables.InstructorFirstName),
+                                                Ls.get(ConstantVariables.InstructorLastname)));
                         if (sh.isEmpty())
                             throw new IllegalArgumentException();
                         methodAndList.put(method, sh);

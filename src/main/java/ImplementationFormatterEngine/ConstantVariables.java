@@ -1,20 +1,22 @@
 package ImplementationFormatterEngine;
 
 public class ConstantVariables {
-    public static final String RoomSchedule     = "roomschedule";
-    public static final String WhoWasThereLast  = "whowastherelast";
-    public static final String WhoIsThereNow    = "whoistherenow";
-    public static final String ProfSchedule     = "profschedule";
-    public static final String WhereIsProf      = "whereisprof";
-    public static final String WhereWillProfBe  = "wherewillprofbe";
+    public static final String RoomSchedule      = "roomschedule";
+    public static final String WhoWasThereLast   = "whowastherelast";
+    public static final String WhoIsThereNow     = "whoistherenow";
+    public static final String ProfSchedule      = "profschedule";
+    public static final String WhereIsProf       = "whereisprof";
+    public static final String WhereWillProfBe   = "wherewillprofbe";
 
-    public static final String InvalidRoom      = "Invalid Room";
-    public static final String InvalidDate      = "Invalid Date";
-    public static final String InvalidDayOfWeek = "Invalid Day of Week";
-    public static final String InvalidProfName  = "Invalid Professor Name";
-    public static final String InvalidCommand   = "Invalid Command";
-    public static final String RoomIsEmpty      = "Room is Empty";
-    public static final String NotInClass       = "Professor is not currently in a class";
+    public static final String InvalidRoom       = "Invalid Room";
+    public static final String InvalidDate       = "Invalid Date";
+    public static final String InvalidDayOfWeek  = "Invalid Day of Week";
+    public static final String InvalidProfName   = "Invalid Professor Name";
+    public static final String InvalidCommand    = "Invalid Command";
+    public static final String RoomIsEmpty       = "Room is Empty";
+    public static final String NotInClass        = "Professor is not currently in a class";
+    public static final String NoClassesThisDate = "There are no courses given on this date";
+    public static final String NoClassesThisDay    = "There are no courses given on this day";
 
     public static final int Method = 0;
 
