@@ -9,7 +9,7 @@ public class ConstantVariables {
     public static final String WhereWillProfBe   = "wherewillprofbe";
     public static final String help              = "help";
     public static final String userhelp          = "Hello\nTo chose a command:\nOn mobile, type / and long press the command you want then type your input\n"
-                                                  +"On a browser, type / then type the command you want, followed by your input"
+                                                  +"On a browser, type / then type the command you want, followed by your input\n"
                                                   +"Note: If an instructor's first or last name if made up of two words or more, enclose the name with double quotes";
 
     public static final String InvalidRoom       = "Invalid Room";
