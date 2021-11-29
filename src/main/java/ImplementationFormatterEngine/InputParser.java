@@ -2,19 +2,19 @@ package ImplementationFormatterEngine;
 
 import InterfacesformatterEngine.IinputParser;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Function;
-import java.util.stream.Collectors;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class InputParser implements IinputParser {
 
     @Override
     public List<String> convertStringToInstruction(String str) {
-        return Arrays.stream(str.split(" ")).collect(Collectors.toList());
+        List<String> list = new ArrayList<String>();
+        Matcher m = Pattern.compile("([^\"]\\S*|\".+?\")\\s*").matcher(str);
+        while (m.find())
+            list.add(m.group(1).replace("\"", ""));
+        return list;
     }
-
-    public Function<String, List<String>> convertStringToInstruction =str ->
-        Arrays.stream(str.split(" ")).collect(Collectors.toList());
-
 }
