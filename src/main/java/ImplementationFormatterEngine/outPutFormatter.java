@@ -21,6 +21,8 @@ public class outPutFormatter implements IoutputFormatter {
             case ConstantVariables.InvalidCommand:
             case ConstantVariables.RoomIsEmpty:
             case ConstantVariables.NotInClass:
+            case ConstantVariables.NoClassesThisDate:
+            case ConstantVariables.NoClassesThisDay:
                 return methodAndList.firstKey();
 
 
