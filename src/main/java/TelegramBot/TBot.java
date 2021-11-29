@@ -3,9 +3,6 @@ package TelegramBot;
 import ImplementationFormatterEngine.InputParser;
 import ImplementationFormatterEngine.Linker;
 import ImplementationFormatterEngine.outPutFormatter;
-import InterfacesformatterEngine.ILinker;
-import InterfacesformatterEngine.IinputParser;
-import InterfacesformatterEngine.IoutputFormatter;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
@@ -17,16 +14,13 @@ public class TBot extends TelegramLongPollingBot {
         // if there is a message that has text
         if (update.hasMessage() && update.getMessage().hasText()) {
             // get the text of the message
-
-            IinputParser iinputParser = new InputParser();
             String receivedText = update.getMessage().getText();
-            ILinker linker = new Linker();
-            IoutputFormatter formatter = new outPutFormatter();
-
+            
             // send a reply
             SendMessage message = new SendMessage();
             message.setChatId(update.getMessage().getChatId().toString());
-            message.setText( formatter.selector(linker.callCoursera(iinputParser.convertStringToInstruction(receivedText))));
+            message.setText(new outPutFormatter().selector(new Linker().callCoursera(new InputParser().convertStringToInstruction(receivedText))));
+
             try {
                 execute(message);
             } catch (TelegramApiException e) {

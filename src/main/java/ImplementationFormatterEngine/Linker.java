@@ -135,7 +135,7 @@ public class Linker implements ILinker {
                         List<Schedule> sh = CS
                                 .profSchedule(new IMInstructor(Ls.get(ConstantVariables.InstructorFirstName).toLowerCase(), Ls.get(ConstantVariables.InstructorLastname).toLowerCase()));
 
-                        //if(sh.isEmpty()) throw new IllegalArgumentException();
+                        if(sh.isEmpty()) throw new IllegalArgumentException();
 
                         methodAndList.put(method, sh);
                         return methodAndList;
@@ -170,7 +170,6 @@ public class Linker implements ILinker {
                         methodAndList.put(error, null);
                         return methodAndList;
                     }
-
                 }
 
                 default:
