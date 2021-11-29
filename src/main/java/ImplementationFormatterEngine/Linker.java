@@ -30,6 +30,10 @@ public class Linker implements ILinker {
 
         try {
             switch (method) {
+                case ConstantVariables.help: {
+                    methodAndList.put(ConstantVariables.help,null);
+                }
+
                 case ConstantVariables.RoomSchedule: {
                     if (Ls.size() == 3) {
                         try {
