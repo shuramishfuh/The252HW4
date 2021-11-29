@@ -67,8 +67,8 @@ public class IMCouseeraTest {
         assertEquals(sc.getCourse(), "MATH 211  Section E2 \"Discrete Mathematics\"");
     }
 
-     @Test
-    //@Ignore
+    //@Test
+    @Ignore
     // This test is time dependent
     // This test was run on Monday at 2.55pm
 
