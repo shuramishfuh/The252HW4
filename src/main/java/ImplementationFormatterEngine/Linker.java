@@ -32,6 +32,7 @@ public class Linker implements ILinker {
             switch (method) {
                 case ConstantVariables.help: {
                     methodAndList.put(ConstantVariables.help,null);
+                    return methodAndList;
                 }
 
                 case ConstantVariables.RoomSchedule: {

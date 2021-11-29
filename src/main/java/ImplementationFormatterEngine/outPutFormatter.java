@@ -14,6 +14,9 @@ public class outPutFormatter implements IoutputFormatter {
 
         switch (methodAndList.firstKey()) {
 
+            case ConstantVariables.help:
+                return ConstantVariables.userhelp;
+
             case ConstantVariables.InvalidDate:
             case ConstantVariables.InvalidRoom:
             case ConstantVariables.InvalidDayOfWeek:
@@ -24,7 +27,6 @@ public class outPutFormatter implements IoutputFormatter {
             case ConstantVariables.NoClassesThisDate:
             case ConstantVariables.NoClassesThisDay:
                 return methodAndList.firstKey();
-
 
             case ConstantVariables.WhereIsProf:
             case ConstantVariables.WhoIsThereNow:
