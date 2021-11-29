@@ -118,7 +118,7 @@ public class Linker implements ILinker {
                         Schedule s = CS.whoIsThereNow(new IMRoom(Ls.get(ConstantVariables.RoomBuilding).toLowerCase(), Ls.get(ConstantVariables.RoomNumber).toLowerCase()));
                         List<Schedule> sh = new ArrayList<>(Arrays.asList(s));
 
-                        //if(sh.isEmpty()) throw new IllegalArgumentException();
+                        if(sh.isEmpty()) throw new IllegalArgumentException();
                         
                         methodAndList.put(method, sh);
                         return methodAndList;
