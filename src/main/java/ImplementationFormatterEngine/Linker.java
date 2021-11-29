@@ -26,134 +26,147 @@ public class Linker implements ILinker {
 
         TreeMap<String, List<Schedule>> methodAndList = new TreeMap<>();
 
-        String method = Ls.get(0).toLowerCase();
+        String method = Ls.get(ConstantVariables.Method).toLowerCase();
 
         try {
             switch (method) {
-                case "roomschedule": {
+                case ConstantVariables.RoomSchedule: {
                     if (Ls.size() == 3) {
                         try {
                             List<Schedule> sh = CS
-                                    .roomSchedule(new IMRoom(Ls.get(1).toLowerCase(), Ls.get(2).toLowerCase()));
+                                    .roomSchedule(new IMRoom(Ls.get(ConstantVariables.RoomBuilding).toLowerCase(), Ls.get(ConstantVariables.RoomNumber).toLowerCase()));
+
+                            if(sh.isEmpty()) throw new IllegalArgumentException();
+
                             methodAndList.put(method, sh);
                             return methodAndList;
                         } catch (Exception e) {
-                            String error = "Invalid Room";
+                            String error = ConstantVariables.InvalidRoom;
                             methodAndList.put(error, null);
                             return methodAndList;
                         }
 
                     }
 
-                    if (Character.isDigit(Ls.get(3).charAt(0))) {
+                    if (Character.isDigit(Ls.get(ConstantVariables.Date).charAt(0))) {
                         LocalDate date = null;
 
                         try {
                             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/y");
-                            date = LocalDate.parse(Ls.get(3), formatter);
+                            date = LocalDate.parse(Ls.get(ConstantVariables.Date), formatter);
                         } catch (Exception e) {
-                            String error = "Invalid Date";
+                            String error = ConstantVariables.InvalidDate;
                             methodAndList.put(error, null);
                             return methodAndList;
                         }
 
                         try {
                             List<Schedule> sh = CS
-                                    .roomSchedule(new IMRoom(Ls.get(1).toLowerCase(), Ls.get(2).toLowerCase()), date);
+                                    .roomSchedule(new IMRoom(Ls.get(ConstantVariables.RoomBuilding).toLowerCase(), Ls.get(ConstantVariables.RoomNumber).toLowerCase()), date);
+
+                            if(sh.isEmpty()) throw new IllegalArgumentException();
+
                             methodAndList.put(method, sh);
                             return methodAndList;
                         } catch (Exception e) {
-                            String error = "Invalid Room";
+                            String error = ConstantVariables.InvalidRoom;
                             methodAndList.put(error, null);
                             return methodAndList;
                         }
                     }
 
-                    if ((Character.isLetter(Ls.get(3).charAt(0)))) {
+                    if ((Character.isLetter(Ls.get(ConstantVariables.DayofWeek).charAt(0)))) {
                         java.time.DayOfWeek day = null;
                         try {
-                            day = java.time.DayOfWeek.valueOf(Ls.get(3).toUpperCase());
+                            day = java.time.DayOfWeek.valueOf(Ls.get(ConstantVariables.DayofWeek).toUpperCase());
                         } catch (Exception e) {
-                            String error = "Invalid Day of Week";
+                            String error = ConstantVariables.InvalidDayOfWeek;
                             methodAndList.put(error, null);
                             return methodAndList;
                         }
                         try {
                             List<Schedule> sh = CS
-                                    .roomSchedule(new IMRoom(Ls.get(1).toLowerCase(), Ls.get(2).toLowerCase()), day);
+                                    .roomSchedule(new IMRoom(Ls.get(ConstantVariables.RoomBuilding).toLowerCase(), Ls.get(ConstantVariables.RoomNumber).toLowerCase()), day);
+
+                            if(sh.isEmpty()) throw new IllegalArgumentException();
+
                             methodAndList.put(method, sh);
                             return methodAndList;
                         } catch (Exception e) {
-                            String error = "Invalid Room";
+                            String error = ConstantVariables.InvalidRoom;
                             methodAndList.put(error, null);
                             return methodAndList;
                         }
                     }
                 }
 
-                case "whowastherelast": {
+                case ConstantVariables.WhoWasThereLast: {
                     try {
-                        Schedule s = CS.whoWasThereLast(new IMRoom(Ls.get(1).toLowerCase(), Ls.get(2).toLowerCase()));
+                        Schedule s = CS.whoWasThereLast(new IMRoom(Ls.get(ConstantVariables.RoomBuilding).toLowerCase(), Ls.get(ConstantVariables.RoomNumber).toLowerCase()));
                         List<Schedule> sh = new ArrayList<>(Arrays.asList(s));
                         methodAndList.put(method, sh);
                         return methodAndList;
                     } catch (Exception e) {
-                        String error = "Invalid Room";
+                        String error = ConstantVariables.InvalidRoom;
                         methodAndList.put(error, null);
                         return methodAndList;
                     }
                 }
 
-                case "whoistherenow": {
+                case ConstantVariables.WhoIsThereNow: {
                     try {
-                        Schedule s = CS.whoIsThereNow(new IMRoom(Ls.get(1).toLowerCase(), Ls.get(2).toLowerCase()));
+                        Schedule s = CS.whoIsThereNow(new IMRoom(Ls.get(ConstantVariables.RoomBuilding).toLowerCase(), Ls.get(ConstantVariables.RoomNumber).toLowerCase()));
                         List<Schedule> sh = new ArrayList<>(Arrays.asList(s));
+
+                        //if(sh.isEmpty()) throw new IllegalArgumentException();
+                        
                         methodAndList.put(method, sh);
                         return methodAndList;
 
                     } catch (Exception e) {
-                        String error = "Invalid Room";
+                        String error = ConstantVariables.InvalidRoom;
                         methodAndList.put(error, null);
                         return methodAndList;
                     }
                 }
 
-                case "profschedule": {
+                case ConstantVariables.ProfSchedule: {
                     try {
                         List<Schedule> sh = CS
-                                .profSchedule(new IMInstructor(Ls.get(1).toLowerCase(), Ls.get(2).toLowerCase()));
+                                .profSchedule(new IMInstructor(Ls.get(ConstantVariables.InstructorFirstName).toLowerCase(), Ls.get(ConstantVariables.InstructorLastname).toLowerCase()));
+
+                        //if(sh.isEmpty()) throw new IllegalArgumentException();
+
                         methodAndList.put(method, sh);
                         return methodAndList;
                     } catch (Exception e) {
-                        String error = "Invalid Professor Name";
+                        String error = ConstantVariables.InvalidProfName;
                         methodAndList.put(error, null);
                         return methodAndList;
                     }
-
                 }
 
-                case "whereisprof": {
+                case ConstantVariables.WhereIsProf: {
                     try {
-                        Schedule s = CS.whereIsProf(new IMInstructor(Ls.get(1).toLowerCase(), Ls.get(2).toLowerCase()));
+                        Schedule s = CS.whereIsProf(new IMInstructor(Ls.get(ConstantVariables.InstructorFirstName).toLowerCase(), Ls.get(ConstantVariables.InstructorLastname).toLowerCase()));
                         List<Schedule> sh = new ArrayList<>(Arrays.asList(s));
                         methodAndList.put(method, sh);
                         return methodAndList;
                     } catch (Exception e) {
-                        String error = "Invalid Professor Name";
+                        String error = ConstantVariables.InvalidProfName;
                         methodAndList.put(error, null);
                         return methodAndList;
                     }
-
                 }
 
-                case "wherewillprofbe": {
+                case ConstantVariables.WhereWillProfBe: {
                     try {
                         List<Schedule> sh = CS
-                                .whereWillProfBe(new IMInstructor(Ls.get(1).toLowerCase(), Ls.get(2).toLowerCase()));
+                                .whereWillProfBe(new IMInstructor(Ls.get(ConstantVariables.InstructorFirstName).toLowerCase(), Ls.get(ConstantVariables.InstructorLastname).toLowerCase()));
                         methodAndList.put(method, sh);
                         return methodAndList;
                     } catch (Exception e) {
-                        String error = "Invalid Professor Name";
+                        String error = ConstantVariables.InvalidProfName;
                         methodAndList.put(error, null);
                         return methodAndList;
                     }
@@ -161,7 +174,7 @@ public class Linker implements ILinker {
                 }
 
                 default:
-                    String error = "Invalid Command";
+                    String error = ConstantVariables.InvalidCommand;
                     methodAndList.put(error, null);
                     return methodAndList;
             }

@@ -12,25 +12,25 @@ public class outPutFormatter implements IoutputFormatter {
     @Override
     public String selector(TreeMap<String, List<Schedule>> methodAndList) {
 
-        if (methodAndList.firstKey().equalsIgnoreCase("invalid date"))
+        if (methodAndList.firstKey().equalsIgnoreCase(ConstantVariables.InvalidDate))
             return methodAndList.firstKey();
         
-        if (methodAndList.firstKey().equalsIgnoreCase("invalid room"))
+        if (methodAndList.firstKey().equalsIgnoreCase(ConstantVariables.InvalidRoom))
             return methodAndList.firstKey();
 
-        if (methodAndList.firstKey().equalsIgnoreCase("invalid day of week"))
+        if (methodAndList.firstKey().equalsIgnoreCase(ConstantVariables.InvalidDayOfWeek))
             return methodAndList.firstKey();
         
-        if (methodAndList.firstKey().equalsIgnoreCase("invalid professor name"))
+        if (methodAndList.firstKey().equalsIgnoreCase(ConstantVariables.InvalidProfName))
             return methodAndList.firstKey();
         
-        if (methodAndList.firstKey().equalsIgnoreCase("invalid command"))
+        if (methodAndList.firstKey().equalsIgnoreCase(ConstantVariables.InvalidCommand))
             return methodAndList.firstKey();
         
         switch (methodAndList.firstKey()) {
-            case "whereisprof":
-            case "whoistherenow":
-            case "whowastherelast":
+            case ConstantVariables.WhereIsProf:
+            case ConstantVariables.WhoIsThereNow:
+            case ConstantVariables.WhoWasThereLast:
                 return scheduleToString(methodAndList.get(methodAndList.firstKey()).get(0));
             default:
                 return scheduleToString(

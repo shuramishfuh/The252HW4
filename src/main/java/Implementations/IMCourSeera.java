@@ -138,10 +138,6 @@ public class IMCourSeera implements Interfaces.CourSeera{//, Comparator<Schedule
                 time = LocalTime.parse("23:59");
             } while (!dayOfWeek.equals(dayToMoveBackWards));
 
-            if (list.size() == 0) {
-                System.out.println("this room has no classes");
-                return null;
-            }
             schedule = list.get(list.size() - 1);
             return schedule;
         }catch (Exception e) {
@@ -152,18 +148,27 @@ public class IMCourSeera implements Interfaces.CourSeera{//, Comparator<Schedule
     @Override
     public Schedule whoIsThereNow(Room room) {
         try {
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm");
-        LocalDate localDate = LocalDate.now();
-        java.time.DayOfWeek dayOfWeek = localDate.getDayOfWeek();
-        LocalTime time = LocalTime.parse(dtf.format(localDate));
-            return roomSchedule().values().stream().flatMap(List::stream)
-                    .collect(Collectors.toList()).stream()
-                    .filter(u -> u.getDay().contains(dayOfWeek))
-                    .filter(u -> u.getRoom()
-                            .equalsIgnoreCase((room.getBuilding().trim() + " " + room.getRoomNumber().trim())))
-                    .filter(t -> t.getFromTime().isBefore(time) && t.getToTime().isAfter(time))
-                    .collect(Collectors.toList()).get(0);
+            boolean test = !roomSchedule.containsKey(room);
+            if(test)
+                return null;
+
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm");
+            LocalDateTime localDate = LocalDateTime.now();
+            java.time.DayOfWeek dayOfWeek = localDate.getDayOfWeek();
+            LocalTime time = LocalTime.parse(dtf.format(localDate));
+            List<Schedule> sch = roomSchedule().values().stream().flatMap(List::stream)
+                            .collect(Collectors.toList()).stream()
+                            .filter(u -> u.getDay().contains(dayOfWeek))
+                            .filter(u -> u.getRoom()
+                                    .equalsIgnoreCase((room.getBuilding().trim() + " " + room.getRoomNumber().trim())))
+                            .filter(t -> t.getFromTime().isBefore(time) && t.getToTime().isAfter(time))
+                            .collect(Collectors.toList());
+            if(sch.isEmpty())
+                return null;                
+            return sch.get(0);
+            
         }catch(Exception e) {
+            System.out.println(e);
             throw new IllegalArgumentException();
         }
     }
