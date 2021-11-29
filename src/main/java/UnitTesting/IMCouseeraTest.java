@@ -1,6 +1,5 @@
 package UnitTesting;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.DayOfWeek;
@@ -68,13 +67,17 @@ public class IMCouseeraTest {
         assertEquals(sc.getCourse(), "MATH 211  Section E2 \"Discrete Mathematics\"");
     }
 
-    // @Test
-    @Ignore
+     @Test
+    //@Ignore
     // This test is time dependent
     // This test was run on Monday at 2.55pm
 
     public void test_courseera_whoIsThereNow() {
+        Initializer();
+        Room r3 = new IMRoom("PHYS","333");
 
+        Schedule sc = CS.whoIsThereNow(r3);
+        assertEquals(sc.getInstructor(), "Muhannad Hariri");
     }
 
     // @Test
@@ -116,7 +119,5 @@ public class IMCouseeraTest {
         assertEquals(sc.get(0).getCourse(), "CVSP 201  Section 7 \"Ancient Near East& Class Civil\"");
         assertEquals(sc.get(1).getCourse(), "CVSP 201  Section 5 \"Ancient Near East& Class Civil\"");
         assertEquals(sc.get(2).getCourse(), "CVSP 201  Section 6 \"Ancient Near East& Class Civil\"");
-
     }
-
 }

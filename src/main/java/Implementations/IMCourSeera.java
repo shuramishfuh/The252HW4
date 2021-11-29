@@ -148,9 +148,9 @@ public class IMCourSeera implements Interfaces.CourSeera{//, Comparator<Schedule
     @Override
     public Schedule whoIsThereNow(Room room) {
         try {
-            boolean test = !roomSchedule.containsKey(room);
-            if(test)
-                return null;
+            boolean isvalidroom = !roomSchedule.containsKey(room);
+            if(isvalidroom)
+                throw new IllegalArgumentException();
 
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm");
             LocalDateTime localDate = LocalDateTime.now();
@@ -164,11 +164,13 @@ public class IMCourSeera implements Interfaces.CourSeera{//, Comparator<Schedule
                             .filter(t -> t.getFromTime().isBefore(time) && t.getToTime().isAfter(time))
                             .collect(Collectors.toList());
             if(sch.isEmpty())
-                return null;                
+                throw new IllegalStateException();      
             return sch.get(0);
             
+        }catch(IllegalStateException e) {
+                throw new IllegalStateException();
+
         }catch(Exception e) {
-            System.out.println(e);
             throw new IllegalArgumentException();
         }
     }
@@ -201,20 +203,32 @@ public class IMCourSeera implements Interfaces.CourSeera{//, Comparator<Schedule
      */
     public Schedule whereIsProf(Instructor instructor) {
         try {
+            boolean isvalidprof = roomSchedule().values().stream()
+                            .flatMap(List::stream)
+                            .collect(Collectors.toList()).stream()
+                            .anyMatch(u -> u.getInstructor().equalsIgnoreCase(instructor.getFirstName() + " " + instructor.getLastName()));
+            if(!isvalidprof) {
+                throw new IllegalArgumentException();
+            }
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm");
         LocalDateTime localDate = LocalDateTime.now();
         LocalTime time = LocalTime.parse(dtf.format(localDate));
         java.time.DayOfWeek dayOfWeek = localDate.getDayOfWeek();
 
-            return roomSchedule().values().stream()
-                    .flatMap(List::stream)
-                    .collect(Collectors.toList()).stream()
-                    .filter(u -> u.getDay().contains(dayOfWeek))
-                    .filter(u -> u.getInstructor().equalsIgnoreCase(
-                            (instructor.getFirstName().trim() + " " + instructor.getLastName().trim())))
-                    .filter(t -> t.getFromTime().isBefore(time) && t.getToTime().isAfter(time))
-                    .collect(Collectors.toList()).get(0);
-        }catch (Exception e) {
+            List<Schedule> sch = roomSchedule().values().stream()
+                            .flatMap(List::stream)
+                            .collect(Collectors.toList()).stream()
+                            .filter(u -> u.getDay().contains(dayOfWeek))
+                            .filter(u -> u.getInstructor().equalsIgnoreCase(
+                                    (instructor.getFirstName().trim() + " " + instructor.getLastName().trim())))
+                            .filter(t -> t.getFromTime().isBefore(time) && t.getToTime().isAfter(time))
+                            .collect(Collectors.toList());
+            if(sch.isEmpty())
+                throw new IllegalStateException();
+            return sch.get(0);
+        }catch (IllegalStateException e) {
+            throw new IllegalStateException();
+        }catch(Exception e){
             throw new IllegalArgumentException();
         }
     }
@@ -229,13 +243,14 @@ public class IMCourSeera implements Interfaces.CourSeera{//, Comparator<Schedule
         try {
         LocalDate localDate = LocalDate.now();
         java.time.DayOfWeek dayOfWeek = localDate.getDayOfWeek();
-        return roomSchedule().values().stream()
-                .flatMap(List::stream)
-                .collect(Collectors.toList()).stream()
-                .filter(u -> u.getDay().contains(dayOfWeek))
-                .filter(u -> u.getInstructor()
-                        .equalsIgnoreCase((instructor.getFirstName().trim() + " " + instructor.getLastName().trim())))
-                .collect(Collectors.toList());
+        List<Schedule> sch =  roomSchedule().values().stream()
+                    .flatMap(List::stream)
+                    .collect(Collectors.toList()).stream()
+                    .filter(u -> u.getDay().contains(dayOfWeek))
+                    .filter(u -> u.getInstructor()
+                            .equalsIgnoreCase((instructor.getFirstName().trim() + " " + instructor.getLastName().trim())))
+                    .collect(Collectors.toList());
+        return sch;
         } catch (Exception e) {
             throw new IllegalArgumentException();
         }

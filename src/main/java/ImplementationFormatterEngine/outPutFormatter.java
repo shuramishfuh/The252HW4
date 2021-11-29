@@ -12,22 +12,18 @@ public class outPutFormatter implements IoutputFormatter {
     @Override
     public String selector(TreeMap<String, List<Schedule>> methodAndList) {
 
-        if (methodAndList.firstKey().equalsIgnoreCase(ConstantVariables.InvalidDate))
-            return methodAndList.firstKey();
-        
-        if (methodAndList.firstKey().equalsIgnoreCase(ConstantVariables.InvalidRoom))
-            return methodAndList.firstKey();
-
-        if (methodAndList.firstKey().equalsIgnoreCase(ConstantVariables.InvalidDayOfWeek))
-            return methodAndList.firstKey();
-        
-        if (methodAndList.firstKey().equalsIgnoreCase(ConstantVariables.InvalidProfName))
-            return methodAndList.firstKey();
-        
-        if (methodAndList.firstKey().equalsIgnoreCase(ConstantVariables.InvalidCommand))
-            return methodAndList.firstKey();
-        
         switch (methodAndList.firstKey()) {
+
+            case ConstantVariables.InvalidDate:
+            case ConstantVariables.InvalidRoom:
+            case ConstantVariables.InvalidDayOfWeek:
+            case ConstantVariables.InvalidProfName:
+            case ConstantVariables.InvalidCommand:
+            case ConstantVariables.RoomIsEmpty:
+            case ConstantVariables.NotInClass:
+                return methodAndList.firstKey();
+
+
             case ConstantVariables.WhereIsProf:
             case ConstantVariables.WhoIsThereNow:
             case ConstantVariables.WhoWasThereLast:

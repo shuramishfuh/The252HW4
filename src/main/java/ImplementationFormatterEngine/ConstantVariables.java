@@ -13,6 +13,8 @@ public class ConstantVariables {
     public static final String InvalidDayOfWeek = "Invalid Day of Week";
     public static final String InvalidProfName  = "Invalid Professor Name";
     public static final String InvalidCommand   = "Invalid Command";
+    public static final String RoomIsEmpty      = "Room is Empty";
+    public static final String NotInClass       = "Professor is not currently in a class";
 
     public static final int Method = 0;
 
