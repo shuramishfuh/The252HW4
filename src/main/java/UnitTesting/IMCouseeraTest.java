@@ -1,6 +1,12 @@
 package UnitTesting;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import Implementations.IMCourSeeraFactory;
+import Implementations.IMInstructor;
+import Implementations.IMRoom;
+import Implementations.Initializer;
+import Interfaces.*;
+import org.junit.Ignore;
+import org.junit.jupiter.api.Test;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -8,10 +14,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Ignore;
-import org.junit.jupiter.api.Test;
-import Implementations.*;
-import Interfaces.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class IMCouseeraTest {
 
