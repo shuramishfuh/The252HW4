@@ -12,9 +12,9 @@ public class InputParser implements IinputParser {
     @Override
     public List<String> convertStringToInstruction(String str) {
         List<String> list = new ArrayList<String>();
-        Matcher m = Pattern.compile("([^\"]\\S*|\".+?\")\\s*").matcher(str);
+        Matcher m = Pattern.compile("([^\"]\\S*|\".+?\"|[^-])\\s*").matcher(str);
         while (m.find())
-            list.add(m.group(1).replace("\"", ""));
+            list.add(m.group(1).replaceAll("\"|-", " "));
         return list;
     }
 }
