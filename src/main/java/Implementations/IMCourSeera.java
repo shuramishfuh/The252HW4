@@ -16,12 +16,13 @@ import java.util.stream.Collectors;
 public class IMCourSeera implements Interfaces.CourSeera {// , Comparator<Schedule> {
     private TreeMap<Room, List<Schedule>> roomSchedule;
 
-    /*
-     * @param rooms -> list of all courses
+    /**
+     * checks if room exists in rooms
      * 
-     * @param room -> single room
+     * @param rooms list of all courses
+     * @param room single room
      *
-     * checks of room exist in rooms
+     * @return a boolean
      */
     private boolean sameRoom(List<Room> rooms, Room room) {
         for (Room r : rooms)
@@ -30,6 +31,10 @@ public class IMCourSeera implements Interfaces.CourSeera {// , Comparator<Schedu
         return false;
     }
 
+    /**
+     * Constructor that builds a TreeMap where its keys are rooms and values are lists of schedules
+     * @param courses a list of all courses 
+     */
     IMCourSeera(List<Course> courses) {
 
         List<Room> roomsCreated = new ArrayList<Room>();
@@ -64,12 +69,17 @@ public class IMCourSeera implements Interfaces.CourSeera {// , Comparator<Schedu
         return this.roomSchedule;
     }
 
-    @Override
-    /*
-     * @param room -> room to find schedule
+    
+    /**
+     * lists the schedule for a specific room
+     * 
+     * @param room  room to find schedule
      *
-     * returns schedule of a particular room
+     * @returns A list of schedules of a particular room
+     * 
+     * @throws IllegalArgumentException If room is not found
      */
+    @Override
     public List<Schedule> roomSchedule(Room room) {
         try {
             return roomSchedule().values().stream()
@@ -84,6 +94,16 @@ public class IMCourSeera implements Interfaces.CourSeera {// , Comparator<Schedu
 
     }
 
+    /**
+     * lists the schedule for a specific room for a specific date
+     * 
+     * @param room  room to find schedule
+     * @param date Localdate to find schedule for a room on a specific date
+     * @return A list of schedules of a particular room
+     * 
+     * @throws IllegalArgumentException If room is not found
+     * @throws IllegalStateException    If room has no classes on a specific date
+     */
     @Override
     public List<Schedule> roomSchedule(Room room, LocalDate date) {
         try {
@@ -106,6 +126,16 @@ public class IMCourSeera implements Interfaces.CourSeera {// , Comparator<Schedu
         }
     }
 
+    /**
+     * lists the schedule for a specific room for a specific day of week
+     * 
+     * @param room  room to find schedule
+     * @param day DayOfWeek to find schedule for a room on a specific day
+     * @return A list of schedules of a particular room
+     * 
+     * @throws IllegalArgumentException If room is not found
+     * @throws IllegalStateException    If room has no classes on a specific day
+     */
     @Override
     public List<Schedule> roomSchedule(Room room, DayOfWeek day) {
         try {
@@ -128,6 +158,15 @@ public class IMCourSeera implements Interfaces.CourSeera {// , Comparator<Schedu
         }
     }
 
+    /**
+     * lists the course and instructor name for the last time this room was occupied
+     * 
+     * @param room  room to find who was there last 
+     * 
+     * @return schedule of a particular room 
+     * 
+     * @throws IllegalArgumentException If room is not found
+     */
     @Override
     public Schedule whoWasThereLast(Room room) {
         try {
@@ -164,6 +203,16 @@ public class IMCourSeera implements Interfaces.CourSeera {// , Comparator<Schedu
         }
     }
 
+    /**
+     * lists the course and instructor name currently occupying a specific room
+     * 
+     * @param room  room to find who is there now 
+     * 
+     * @return schedule of a particular room 
+     * 
+     * @throws IllegalArgumentException If room is not found
+     * @throws IllegalStateException    If no one is in the room now
+     */    
     @Override
     public Schedule whoIsThereNow(Room room) {
         try {
@@ -194,12 +243,17 @@ public class IMCourSeera implements Interfaces.CourSeera {// , Comparator<Schedu
         }
     }
 
-    @Override
-    /*
-     * @Param instructor -> instructor to find schedule
+    
+    /**
+     * lists the instructor's weekly schedule (day, time, room)
+     * 
+     * @param instructor instructor to find schedule
      *
-     * returns schedule of an instructor for a week
+     * @return A list of schedules of an instructor
+     * 
+     * @throws IllegalArguementException if instructor is not found
      */
+    @Override
     public List<Schedule> profSchedule(Instructor instructor) {
         try {
             return roomSchedule().values().stream()
@@ -215,12 +269,18 @@ public class IMCourSeera implements Interfaces.CourSeera {// , Comparator<Schedu
 
     }
 
-    @Override
-    /*
-     * @Param instructor -> instructor to find schedule
+    
+    /**
+     * lists the room where a prof is currently teaching (if any)
+     * 
+     * @param instructor instructor to find 
      *
-     * returns schedule of an instructor for a particular time
+     * @return schedule of an instructor 
+     * 
+     * @throws IllegalArguementException if instructor is not found
+     * @throws IllegalStateException     if instructor is not in any room currently
      */
+    @Override
     public Schedule whereIsProf(Instructor instructor) {
         try {
             boolean isvalidprof = roomSchedule().values().stream()
@@ -254,12 +314,18 @@ public class IMCourSeera implements Interfaces.CourSeera {// , Comparator<Schedu
         }
     }
 
-    @Override
-    /*
-     * @Param instructor -> instructor to find schedule
+    
+    /** 
+     * lists the instructor's schedule for today
+     * 
+     * @param instructor instructor to find schedule
      *
-     * returns schedule of an instructor for a particular day
+     * @return a list of schedules of an instructor for a today
+     * 
+     * @throws IllegalArguementException if the instructor is not found
+     * @throws IllegalStateException     if the instructor teaches no classes today
      */
+    @Override
     public List<Schedule> whereWillProfBe(Instructor instructor) {
         try {
             boolean isvalidprof = roomSchedule().values().stream()

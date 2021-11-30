@@ -7,8 +7,16 @@ import java.util.List;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
 
+/**
+ * This class outputs to the user
+ */
 public class outPutFormatter implements IoutputFormatter {
 
+    /**
+     * Selects appropriate output depending on user's input
+     * @param methodAndList A TreeMap
+     * @return A string to be printed to the user
+     */
     @Override
     public String selector(TreeMap<String, List<Schedule>> methodAndList) {
 
@@ -27,6 +35,7 @@ public class outPutFormatter implements IoutputFormatter {
             case ConstantVariables.NoCoursesGiven:
             case ConstantVariables.NoClassesThisDate:
             case ConstantVariables.NoClassesThisDay:
+            case ConstantVariables.SomethingWentWrong:
                 return methodAndList.firstKey();
 
             case ConstantVariables.WhereIsProf:
@@ -40,6 +49,11 @@ public class outPutFormatter implements IoutputFormatter {
         }
     }
 
+    /**
+     * Prints a List of Schedules
+     * @param schedules A list of Schedules
+     * @return A string
+     */
     @Override
     public String scheduleToString(List<Schedule> schedules) {
         String message = "";
@@ -50,6 +64,11 @@ public class outPutFormatter implements IoutputFormatter {
         return message;
     }
 
+    /**
+     * Prints a Schedule
+     * @param LS A schedule
+     * @return A string
+     */
     @Override
     public String scheduleToString(Schedule LS) {
         return LS.getInstructor() + " " + LS.getCourse();

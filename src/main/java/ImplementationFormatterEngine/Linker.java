@@ -14,8 +14,17 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.TreeMap;
 
+
+/**
+ * This class calls the appropriate method 
+ */
 public class Linker implements ILinker {
 
+    /**
+     * Calls the appropriate Courseera method
+     * @param Ls A List os strings
+     * @return A TreeMap
+     */
     @Override
     public TreeMap<String, List<Schedule>> callCoursera(List<String> Ls) {
 
@@ -26,7 +35,7 @@ public class Linker implements ILinker {
 
         TreeMap<String, List<Schedule>> methodAndList = new TreeMap<>();
 
-        String method = Ls.get(ConstantVariables.Method).toLowerCase();
+        String method = Ls.get(ConstantVariables.Method).toLowerCase();//the method the user inputted
 
         try {
             switch (method) {
@@ -36,7 +45,7 @@ public class Linker implements ILinker {
                 }
 
                 case ConstantVariables.RoomSchedule: {
-                    if (Ls.size() == 3) {
+                    if (Ls.size() == 3) {                           //roomSchedule with one parameter
                         try {
                             List<Schedule> sh = CS
                                     .roomSchedule(new IMRoom(Ls.get(ConstantVariables.RoomBuilding).toUpperCase(),
@@ -55,7 +64,7 @@ public class Linker implements ILinker {
 
                     }
 
-                    if (Character.isDigit(Ls.get(ConstantVariables.Date).charAt(0))) {
+                    if (Character.isDigit(Ls.get(ConstantVariables.Date).charAt(0))) { //roomSchedule with room and date
                         LocalDate date = null;
 
                         try {
@@ -85,7 +94,7 @@ public class Linker implements ILinker {
                         }
                     }
 
-                    if ((Character.isLetter(Ls.get(ConstantVariables.DayofWeek).charAt(0)))) {
+                    if ((Character.isLetter(Ls.get(ConstantVariables.DayofWeek).charAt(0)))) { //roomSchedule with room and day
                         java.time.DayOfWeek day = null;
                         try {
                             day = java.time.DayOfWeek.valueOf(Ls.get(ConstantVariables.DayofWeek).toUpperCase());
@@ -212,7 +221,9 @@ public class Linker implements ILinker {
             }
 
         } catch (Exception e) {
-            return null;
+            String error = ConstantVariables.SomethingWentWrong;
+            methodAndList.put(error, null);
+            return methodAndList;
         }
     }
 }

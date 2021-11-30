@@ -24,6 +24,8 @@ public class ConstantVariables {
     public static final String NoClassesThisDate = "There are no courses given on this date";
     public static final String NoClassesThisDay  = "There are no courses given on this day";
 
+    public static final String SomethingWentWrong= "Oops, something went wrong\nPlease try again later";
+
     public static final int Method = 0;
 
     public static final int RoomBuilding = 1;
