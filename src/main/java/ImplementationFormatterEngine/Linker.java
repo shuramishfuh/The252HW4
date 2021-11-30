@@ -191,11 +191,14 @@ public class Linker implements ILinker {
                                 .whereWillProfBe(
                                         new IMInstructor(Ls.get(ConstantVariables.InstructorFirstName),
                                                 Ls.get(ConstantVariables.InstructorLastname)));
-                        if (sh.isEmpty())
-                            throw new IllegalArgumentException();
+
                         methodAndList.put(method, sh);
                         return methodAndList;
-                    } catch (Exception e) {
+                    } catch (IllegalStateException e) {
+                        String error = ConstantVariables.NoCoursesGiven;
+                        methodAndList.put(error, null);
+                        return methodAndList;
+                    }catch (Exception e) {
                         String error = ConstantVariables.InvalidProfName;
                         methodAndList.put(error, null);
                         return methodAndList;

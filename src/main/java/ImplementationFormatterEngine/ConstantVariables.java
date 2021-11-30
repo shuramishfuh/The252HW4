@@ -19,6 +19,7 @@ public class ConstantVariables {
     public static final String InvalidProfName   = "Invalid Professor Name";
     public static final String InvalidCommand    = "Invalid Command";
     public static final String RoomIsEmpty       = "Room is Empty";
+    public static final String NoCoursesGiven    = "The Professor has no classes today";
     public static final String NotInClass        = "Professor is not currently in a class";
     public static final String NoClassesThisDate = "There are no courses given on this date";
     public static final String NoClassesThisDay  = "There are no courses given on this day";

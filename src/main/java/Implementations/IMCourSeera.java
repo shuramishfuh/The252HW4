@@ -262,6 +262,14 @@ public class IMCourSeera implements Interfaces.CourSeera {// , Comparator<Schedu
      */
     public List<Schedule> whereWillProfBe(Instructor instructor) {
         try {
+            boolean isvalidprof = roomSchedule().values().stream()
+                    .flatMap(List::stream)
+                    .collect(Collectors.toList()).stream()
+                    .anyMatch(u -> u.getInstructor()
+                            .equalsIgnoreCase(instructor.getFirstName() + " " + instructor.getLastName()));
+            if (!isvalidprof) {
+                throw new IllegalArgumentException();
+            }
             LocalDate localDate = LocalDate.now();
             java.time.DayOfWeek dayOfWeek = localDate.getDayOfWeek();
             List<Schedule> sch = roomSchedule().values().stream()
@@ -272,10 +280,13 @@ public class IMCourSeera implements Interfaces.CourSeera {// , Comparator<Schedu
                             .equalsIgnoreCase(
                                     (instructor.getFirstName().trim() + " " + instructor.getLastName().trim())))
                     .collect(Collectors.toList());
+            if(sch.isEmpty())
+                throw new IllegalStateException();
             return sch;
+        } catch (IllegalStateException e) {
+            throw new IllegalStateException();
         } catch (Exception e) {
             throw new IllegalArgumentException();
         }
     }
-
 }
